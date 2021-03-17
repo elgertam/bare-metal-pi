@@ -1,0 +1,8 @@
+"32-bit Word Offset","Description","Associated Read-Only Register"
+"0","Transfer Information","TI"
+"1","Source Address","SOURCE_AD"
+"2","Destination Address","DEST_AD"
+"3","Transfer Length","TXFR_LEN"
+"4","2D Mode Stride","STRIDE"
+"5","Next Control Block Address","NEXTCONBK"
+"6-7","Reserved – set to zero.","N/A"

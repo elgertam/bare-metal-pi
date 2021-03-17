@@ -1,0 +1,43 @@
+"6","WAITING_FOR_OUTSTANDING_WRITES","DMA is Waiting for the Last Write to be 
+Received 
+Indicates if the DMA is currently waiting 
+for any outstanding writes to be 
+received, and is not transferring data. 
+1 = DMA channel is waiting.","RO","0x0"
+"5","DREQ_STOPS_DMA","DMA Paused by DREQ State 
+Indicates if the DMA is currently paused 
+and not transferring data due to the 
+DREQ being inactive.. 
+1 = DMA channel is paused. 
+0 = DMA channel is running.","RO","0x0"
+"4","PAUSED","DMA Paused State 
+Indicates if the DMA is currently paused 
+and not transferring data. This will occur 
+if: the active bit has been cleared, if the 
+DMA is currently executing wait cycles 
+or if the debug_pause signal has been 
+set by the debug block, or the number of 
+outstanding writes has exceeded the 
+max count. 
+1 = DMA channel is paused. 
+0 = DMA channel is running.","RO","0x0"
+"3","DREQ","DREQ State 
+Indicates the state of the selected DREQ 
+(Data Request) signal, ie. the DREQ 
+selected by the PERMAP field of the 
+transfer info. 
+1 = Requesting data. This will only be 
+valid once the DMA has started and the 
+PERMAP field has been loaded from the 
+CB. It will remain valid, indicating the 
+selected DREQ signal, until a new CB is 
+loaded. If PERMAP is set to zero (un-
+paced transfer) then this bit will read 
+back as 1. 
+0 = No data request.","RO","0x0"
+"2","INT","Interrupt Status 
+This is set when the transfer for the CB 
+ends and INTEN is set to 1. Once set it 
+must be manually cleared down, even if 
+the next CB has INTEN = 0. 
+Write 1 to clear.","W1C","0x0"

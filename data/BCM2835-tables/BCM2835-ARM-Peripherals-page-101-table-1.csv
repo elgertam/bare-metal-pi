@@ -1,0 +1,7 @@
+"31-2","---","Unused","R","0"
+"1-0","PUD","PUD - GPIO Pin Pull-up/down 
+00 = Off – disable pull-up/down 
+01 = Enable Pull Down control 
+10 = Enable Pull Up control 
+11 = Reserved 
+*Use in conjunction with GPPUDCLK0/1/2","R/W","0"

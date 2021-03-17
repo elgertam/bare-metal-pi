@@ -1,0 +1,36 @@
+"Address
+Offset","Register Name","Description","Size"
+"0x010","0_DEST_AD","DMA Channel 0 CB Word 2
+(Destination Address)","32"
+"0x014","0_TXFR_LEN","DMA Channel 0 CB Word 3
+(Transfer Length)","32"
+"0x018","0_STRIDE","DMA Channel 0 CB Word 4
+(2D Stride)","32"
+"0x01C","0_NEXTCONBK","DMA Channel 0 CB Word 5
+(Next CB Address)","32"
+"0x020","0_DEBUG","DMA Channel 0 Debug","32"
+"0x100","1_CS","DMA Channel 1 Control and Status","32"
+"0x104","1_CONBLK_AD","DMA Channel 1 Control Block Address","32"
+"0x108","1_TI","DMA Channel 1 CB Word 0
+(Transfer Information)","32"
+"0x10C","1_SOURCE_AD","DMA Channel 1 CB Word 1
+(Source Address)","32"
+"0x110","1_DEST_AD","DMA Channel 1 CB Word 2
+(Destination Address)","32"
+"0x114","1_TXFR_LEN","DMA Channel 1 CB Word 3
+(Transfer Length)","32"
+"0x118","1_STRIDE","DMA Channel 1 CB Word 4
+(2D Stride)","32"
+"0x11C","1_NEXTCONBK","DMA Channel 1 CB Word 5
+(Next CB Address)","32"
+"0x120","1_DEBUG","DMA Channel 1 Debug","32"
+"0x200","2_CS","DMA Channel 2 Control and Status","32"
+"0x204","2_CONBLK_AD","DMA Channel 2 Control Block Address","32"
+"0x208","2_TI","DMA Channel 2 CB Word 0
+(Transfer Information)","32"
+"0x20C","2_SOURCE_AD","DMA Channel 2 CB Word 1
+(Source Address)","32"
+"0x210","2_DEST_AD","DMA Channel 2 CB Word 2
+(Destination Address)","32"
+"0x214","2_TXFR_LEN","DMA Channel 2 CB Word 3
+(Transfer Length)","32"

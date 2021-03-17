@@ -1,0 +1,9 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"31:24","PASSWD","Clock Manager password ""5a""","WO","0"
+"23:12","DIVI","Integer part of divisor
+This value has a minimum limit determined by the
+MASH setting. See text for details. To avoid lock-ups and
+glitches do not change this control while BUSY=1.","RW","0"
+"11:0","DIVF","Fractional part of divisor
+To avoid lock-ups and glitches do not change this
+control while BUSY=1.","RW","0"

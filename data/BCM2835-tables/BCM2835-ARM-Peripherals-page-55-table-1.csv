@@ -1,0 +1,28 @@
+"28","LITE","DMA Lite 
+Set if the DMA is a reduced performance LITE 
+engine.","RO","0x0"
+"27:25","VERSION","DMA Version 
+DMA version number, indicating control bit filed 
+changes.","RO","0x2"
+"24:16","DMA_STATE","DMA State Machine State 
+Returns the value of the DMA engines state 
+machine for this channel.","RO","0x0"
+"15:8","DMA_ID","DMA ID 
+Returns the DMA AXI ID of this DMA channel.","RO","0x0"
+"7:4","OUTSTANDING_WRITES","DMA Outstanding Writes Counter 
+Returns the number of write responses that have 
+not yet been received. 
+This count is reset at the start of each new DMA 
+transfer or with a DMA reset.","RO","0x0"
+"3","","Reserved - Write as 0, read as don't care","",""
+"2","READ_ERROR","Slave Read Response Error 
+Set if the read operation returned an error value on 
+the read response bus. It can be cleared by writing 
+a 1,","RW","0x0"
+"1","FIFO_ERROR","Fifo Error 
+Set if the optional read Fifo records an error 
+condition. It can be cleared by writing a 1,","RW","0x0"
+"0","READ_LAST_NOT_SET_ERROR","Read Last Not Set Error 
+If the AXI read last signal was not set when 
+expected, then this error bit will be set. It can be 
+cleared by writing a 1.","RW","0x0"

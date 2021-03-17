@@ -1,0 +1,4 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"31-22","-","Reserved","R","0"
+"21-0","HENn (n=32..53)","0 = High detect disabled on GPIO pin n 
+1 = High on GPIO pin n sets corresponding bit in GPEDS","R/W","0"

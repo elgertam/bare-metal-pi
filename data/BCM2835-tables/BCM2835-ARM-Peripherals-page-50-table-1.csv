@@ -1,0 +1,14 @@
+"1","END","DMA End Flag 
+Set when the transfer described by the 
+current control block is complete. Write 
+1 to clear.","W1C","0x0"
+"0","ACTIVE","Activate the DMA 
+This bit enables the DMA. The DMA will 
+start if this bit is set and the CB_ADDR is 
+non zero. The DMA transfer can be 
+paused and resumed by clearing, then 
+setting it again. 
+This bit is automatically cleared at the 
+end of the complete DMA transfer, ie. 
+after a NEXTCONBK = 0x0000_0000 has 
+been loaded.","RW","0x0"

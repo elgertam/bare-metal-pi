@@ -1,0 +1,59 @@
+"Address
+Offset","Register Name","Description","Size"
+"0x5C","GPFEN1","GPIO Pin Falling Edge Detect Enable 1","32"
+"0x60
+-
+Reserved
+-","","",""
+"0x64
+GPHEN0
+GPIO Pin High Detect Enable 0
+32","","",""
+"0x68
+GPHEN1
+GPIO Pin High Detect Enable 1
+32","","",""
+"0x6C
+-
+Reserved
+-","","",""
+"0x70
+GPLEN0
+GPIO Pin Low Detect Enable 0
+32","","",""
+"0x74
+GPLEN1
+GPIO Pin Low Detect Enable 1
+32","","",""
+"0x78
+-
+Reserved
+-","","",""
+"0x7C
+GPAREN0
+GPIO Pin Async. Rising Edge Detect 0
+32","","",""
+"0x80
+GPAREN1
+GPIO Pin Async. Rising Edge Detect 1
+32","","",""
+"0x84
+-
+Reserved
+-","","",""
+"0x88
+GPAFEN0
+GPIO Pin Async. Falling Edge Detect 0
+32","","",""
+"0x8C
+GPAFEN1
+GPIO Pin Async. Falling Edge Detect 1
+32","","",""
+"0x90
+-
+Reserved
+-","","",""
+"0xE4","GPIO_PUP_PDN_CNTRL_REG0","GPIO Pull-up / Pull-down Register 0","32"
+"0xE8","GPIO_PUP_PDN_CNTRL_REG1","GPIO Pull-up / Pull-down Register 1","32"
+"0xEC","GPIO_PUP_PDN_CNTRL_REG2","GPIO Pull-up / Pull-down Register 2","32"
+"0xF0","GPIO_PUP_PDN_CNTRL_REG3","GPIO Pull-up / Pull-down Register 3","32"

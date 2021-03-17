@@ -1,0 +1,8 @@
+"Address
+Offset","Register Name","Description","Size"
+"0x70","CM_GP0CTL","Clock Manager General Purpose Clocks Control","32"
+"0x74","CM_GP0DIV","Clock Manager General Purpose Clock Divisors","32"
+"0x78","CM_GP1CTL","Clock Manager General Purpose Clocks Control","32"
+"0x7C","CM_GP1DIV","Clock Manager General Purpose Clock Divisors","32"
+"0x80","CM_GP2CTL","Clock Manager General Purpose Clocks Control","32"
+"0x84","CM_GP2DIV","Clock Manager General Purpose Clock Divisors","32"

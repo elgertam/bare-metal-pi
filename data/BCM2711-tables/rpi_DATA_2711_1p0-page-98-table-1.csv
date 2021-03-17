@@ -1,0 +1,5 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"31:0","AFENn (n=0..31)","0 = Asynchronous falling edge detect disabled on GPIO
+pin n
+1 = Asynchronous falling edge on GPIO pin n sets
+corresponding bit in GPEDS0","RW","0"

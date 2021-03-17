@@ -1,0 +1,30 @@
+"Bit(s)
+Field Name
+Description
+Type
+Reset","","","",""
+"6
+Reserved - Write as 0, read as don’t care","","","",""
+"5","KILL","Kill the clock generator
+0 = no action
+1 = stop and reset the clock generator
+This is intended for test/debug only. Using this control
+may cause a glitch on the clock generator output.","RW","0"
+"4","ENAB","Enable the clock generator
+This requests the clock to start or stop without glitches.
+The output clock will not stop immediately because the
+cycle must be allowed to complete to avoid glitches. The
+BUSY flag will go low when the final cycle is completed.","RW","0"
+"3:0","SRC","Clock source
+0 = GND
+1 = oscillator
+2 = testdebug0
+3 = testdebug1
+4 = PLLA per
+5 = PLLC per
+6 = PLLD per
+7 = HDMI auxiliary
+8-15 = GND
+To avoid lock-ups and glitches do not change this
+control while BUSY=1 and do not change this control at
+the same time as asserting ENAB.","RW","0"

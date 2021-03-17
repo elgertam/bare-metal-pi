@@ -1,0 +1,17 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"15:14","GPIO_PUP_PDN_C
+NTRL55","Resistor Select for GPIO55","RW","0x2"
+"13:12","GPIO_PUP_PDN_C
+NTRL54","Resistor Select for GPIO54","RW","0x2"
+"11:10","GPIO_PUP_PDN_C
+NTRL53","Resistor Select for GPIO53","RW","0x2"
+"09:08","GPIO_PUP_PDN_C
+NTRL52","Resistor Select for GPIO52","RW","0x2"
+"07:06","GPIO_PUP_PDN_C
+NTRL51","Resistor Select for GPIO51","RW","0x2"
+"05:04","GPIO_PUP_PDN_C
+NTRL50","Resistor Select for GPIO50","RW","0x2"
+"03:02","GPIO_PUP_PDN_C
+NTRL49","Resistor Select for GPIO49","RW","0x2"
+"01:00","GPIO_PUP_PDN_C
+NTRL48","Resistor Select for GPIO48","RW","0x2"

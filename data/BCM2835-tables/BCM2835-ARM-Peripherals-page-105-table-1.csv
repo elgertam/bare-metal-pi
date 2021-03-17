@@ -1,0 +1,5 @@
+"MASH","min DIVI","min output freq","average output freq","max output freq"
+"0 (int divide)","1","source / ( DIVI )","source / ( DIVI )","source / ( DIVI )"
+"1","2","source / ( DIVI )","source / ( DIVI + DIVF / 1024 )","source / ( DIVI + 1 )"
+"2","3","source / ( DIVI - 1 )","source / ( DIVI + DIVF / 1024 )","source / ( DIVI + 2 )"
+"3","5","source / ( DIVI - 3 )","source / ( DIVI + DIVF / 1024 )","source / ( DIVI + 4 )"

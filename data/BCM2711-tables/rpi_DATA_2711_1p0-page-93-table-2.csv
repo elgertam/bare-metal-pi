@@ -1,0 +1,3 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"31:0","CLRn (n=0..31)","0 = No effect
+1 = Clear GPIO pin n","WO","0"

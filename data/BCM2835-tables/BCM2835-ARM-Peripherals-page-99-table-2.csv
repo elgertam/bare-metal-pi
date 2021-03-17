@@ -1,0 +1,4 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"31-22","-","Reserved","R","0"
+"21-0","LENn (n=32..53)","0 = Low detect disabled on GPIO pin n 
+1 = Low on GPIO pin n sets corresponding bit in GPEDS","R/W","0"

@@ -1,0 +1,5 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"31-22","-","Reserved","R","0"
+"21-0","SETn 
+(n=32..53)","0 = No effect 
+1 = Set GPIO pin n.","R/W","0"

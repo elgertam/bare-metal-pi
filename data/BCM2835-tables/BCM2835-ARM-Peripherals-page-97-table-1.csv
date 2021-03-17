@@ -1,0 +1,5 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"31-22","-","Reserved","R","0"
+"21-0","EDSn 
+(n=32..53)","0 = Event not detected on GPIO pin n 
+1 = Event detected on GPIO pin n","R/W","0"

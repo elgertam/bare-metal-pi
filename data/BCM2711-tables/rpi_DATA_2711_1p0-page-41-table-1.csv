@@ -1,0 +1,7 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"31:16","FEDL","Falling Edge Delay
+Number of core clock cycles to wait after the falling
+edge of SCL before outputting next bit of data.","RW","0x30"
+"15:0","REDL","Rising Edge Delay
+Number of core clock cycles to wait after the rising edge
+of SCL before reading the next bit of data.","RW","0x30"

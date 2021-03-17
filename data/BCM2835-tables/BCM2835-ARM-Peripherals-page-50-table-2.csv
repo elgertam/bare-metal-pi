@@ -1,0 +1,14 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"31:0","SCB_ADDR","Control Block Address 
+This tells the DMA where to find a Control Block 
+stored in memory. When the ACTIVE bit is set and this 
+address is non zero, the DMA will begin its transfer by 
+loading the contents of the addressed CB into the 
+relevant DMA channel registers. 
+At the end of the transfer this register will be updated 
+with the ADDR field of the NEXTCONBK control block 
+register. If this field is zero, the DMA will stop. 
+Reading this register will return the address of the 
+currently active CB (in the linked list of CB s). The 
+address must be 256 bit aligned, so the bottom 5 bits 
+of the address must be zero.","RW","0x0"

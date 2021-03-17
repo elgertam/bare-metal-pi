@@ -1,0 +1,8 @@
+"Address
+Offset","Register Name","Description","Size"
+"0x000","0_CS","DMA Channel 0 Control and Status","32"
+"0x004","0_CONBLK_AD","DMA Channel 0 Control Block Address","32"
+"0x008","0_TI","DMA Channel 0 CB Word 0
+(Transfer Information)","32"
+"0x00C","0_SOURCE_AD","DMA Channel 0 CB Word 1
+(Source Address)","32"

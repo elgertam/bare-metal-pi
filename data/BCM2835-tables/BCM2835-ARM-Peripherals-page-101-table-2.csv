@@ -1,0 +1,5 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"(31-0)","PUDCLKn 
+(n=0..31)","0 = No Effect 
+1 = Assert Clock on line (n) 
+*Must be used in conjunction with GPPUD","R/W","0"

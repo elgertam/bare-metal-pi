@@ -1,0 +1,39 @@
+"28","WAIT_FOR_OUTSTANDING_WRITES","Wait for outstanding writes 
+When set to 1, the DMA will keep a tally 
+of the AXI writes going out and the write 
+responses coming in. At the very end of 
+the current DMA transfer it will wait 
+until the last outstanding write response 
+has been received before indicating the 
+transfer is complete. Whilst waiting it 
+will load the next CB address (but will 
+not fetch the CB), clear the active flag (if 
+the next CB address = zero), and it will 
+defer setting the END flag or the INT flag 
+until the last outstanding write response 
+has been received. 
+In this mode, the DMA will pause if it has 
+more than 13 outstanding writes at any 
+one time.","RW","0x0"
+"27:24","","Reserved - Write as 0, read as don't care","",""
+"23:20","PANIC_PRIORITY","AXI Panic Priority Level 
+Sets the priority of panicking AXI bus 
+transactions. This value is used when the 
+panic bit of the selected peripheral 
+channel is 1. 
+Zero is the lowest priority.","RW","0x0"
+"19:16","PRIORITY","AXI Priority Level 
+Sets the priority of normal AXI bus 
+transactions. This value is used when the 
+panic bit of the selected peripheral 
+channel is zero. 
+Zero is the lowest priority.","RW","0x0"
+"15:9","","Reserved - Write as 0, read as don't care","",""
+"8","ERROR","DMA Error 
+Indicates if the DMA has detected an 
+error. The error flags are available in the 
+debug register, and have to be cleared 
+by writing to that register. 
+1 = DMA channel has an error flag set. 
+0 = DMA channel is ok.","RO","0x0"
+"7","","Reserved - Write as 0, read as don't care","",""

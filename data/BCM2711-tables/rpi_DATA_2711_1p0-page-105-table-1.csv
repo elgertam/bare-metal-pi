@@ -1,0 +1,49 @@
+"Name
+Function","","See section"
+"SCL0
+BSC master 0 clock line","","BSC"
+"SDAx
+BSC master 1,3,4,5,6[9] data line","","BSC"
+"SCLx
+BSC master 1,3,4,5,6 clock line","","BSC"
+"GPCLKx","General purpose Clock 0,1,2","General Purpose GPIO Clocks"
+"SPIx_CE2_N","SPI 0,3,4,5,6 Chip select 2","SPI"
+"SPIx_CE1_N","SPI 0,3,4,5,6 Chip select 1","SPI"
+"SPIx_CE0_N","SPI 0,3,4,5,6 Chip select 0","SPI"
+"SPIx_MISO","SPI 0,3,4,5,6 MISO","SPI"
+"SPIx_MOSI","SPI 0,3,4,5,6 MOSI","SPI"
+"SPIx_SCLK","SPI 0,3,4,5,6 Serial clock","SPI"
+"PWMx_0","PWM 0,1 channel 0","Pulse Width Modulator"
+"PWMx_1","PWM 0,1 channel 1","Pulse Width Modulator"
+"TXDx
+UART 0,2,3,4,5 Transmit Data","","UART"
+"RXDx
+UART 0,2,3,4,5 Receive Data","","UART"
+"CTSx
+UART 0,2,3,4,5 Clear To Send","","UART"
+"RTSx
+UART 0,2,3,4,5 Request To Send","","UART"
+"PCM_CLK","PCM clock","PCM Audio"
+"PCM_FS","PCM Frame Sync","PCM Audio"
+"PCM_DIN","PCM Data in","PCM Audio"
+"PCM_DOUT","PCM data out","PCM Audio"
+"SAx
+Secondary mem Address bus","","Secondary Memory Interface"
+"SOE_N / SE
+Secondary mem. Controls","","Secondary Memory Interface"
+"SWE_N / SRW_N
+Secondary mem. Controls","","Secondary Memory Interface"
+"SDx
+Secondary mem. data bus","","Secondary Memory Interface"
+"BSCSL SDA / MOSI
+BSC slave Data, SPI slave MOSI","","BSC/SPI slave"
+"BSCSL SCL / SCLK
+BSC slave Clock, SPI slave clock","","BSC/SPI slave"
+"BSCSL - / MISO
+BSC <not used>, SPI MISO","","BSC/SPI slave"
+"BSCSL - / CE_N
+BSC <not used>, SPI CSn","","BSC/SPI slave"
+"SPI1_CE2_N","SPI 1[10] Chip select 2","Auxiliary I/O"
+"SPI1_CE1_N","SPI 1 Chip select 1","Auxiliary I/O"
+"SPI1_CE0_N","SPI 1 Chip select 0","Auxiliary I/O"
+"SPI1_MISO","SPI 1 MISO","Auxiliary I/O"

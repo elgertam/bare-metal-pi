@@ -1,0 +1,20 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"31-30","---","Reserved","R","0"
+"29-27","FSEL49","FSEL49 - Function Select 49 
+000 = GPIO Pin 49 is an input 
+001 = GPIO Pin 49 is an output 
+100 = GPIO Pin 49 takes alternate function 0 
+101 = GPIO Pin 49 takes alternate function 1 
+110 = GPIO Pin 49 takes alternate function 2 
+111 = GPIO Pin 49 takes alternate function 3 
+011 = GPIO Pin 49 takes alternate function 4 
+010 = GPIO Pin 49 takes alternate function 5","R/W","0"
+"26-24","FSEL48","FSEL48 - Function Select 48","R/W","0"
+"23-21","FSEL47","FSEL47 - Function Select 47","R/W","0"
+"20-18","FSEL46","FSEL46 - Function Select 46","R/W","0"
+"17-15","FSEL45","FSEL45 - Function Select 45","R/W","0"
+"14-12","FSEL44","FSEL44 - Function Select 44","R/W","0"
+"11-9","FSEL43","FSEL43 - Function Select 43","R/W","0"
+"8-6","FSEL42","FSEL42 - Function Select 42","R/W","0"
+"5-3","FSEL41","FSEL41 - Function Select 41","R/W","0"
+"2-0","FSEL40","FSEL40 - Function Select 40","R/W","0"

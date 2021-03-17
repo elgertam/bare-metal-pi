@@ -1,0 +1,5 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"31:16","","Reserved - Write as 0, read as don't care","",""
+"15:0","XLENGTH","Transfer Length 
+Length of transfer, in bytes. Updated by the DMA 
+engine as the transfer progresses.","RW","0x0"

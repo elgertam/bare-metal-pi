@@ -1,0 +1,4 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"31:0","D_ADDR","DMA Destination Address 
+Destination address for the DMA operation. Updated 
+by the DMA engine as the transfer progresses.","RW","0x0"

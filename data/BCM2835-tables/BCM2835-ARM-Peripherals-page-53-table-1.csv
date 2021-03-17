@@ -1,0 +1,4 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"31:0","S_ADDR","DMA Source Address 
+Source address for the DMA operation. Updated by 
+the DMA engine as the transfer progresses.","RW","0x0"

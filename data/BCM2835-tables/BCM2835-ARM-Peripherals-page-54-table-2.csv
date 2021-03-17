@@ -1,0 +1,2 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"31:0","ADDR","Address of next CB for chained DMA operations.","RW","0x0"

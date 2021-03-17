@@ -1,0 +1,36 @@
+"Address
+Offset","Register Name","Description","Size"
+"0x500","5_CS","DMA Channel 5 Control and Status","32"
+"0x504","5_CONBLK_AD","DMA Channel 5 Control Block Address","32"
+"0x508","5_TI","DMA Channel 5 CB Word 0
+(Transfer Information)","32"
+"0x50C","5_SOURCE_AD","DMA Channel 5 CB Word 1
+(Source Address)","32"
+"0x510","5_DEST_AD","DMA Channel 5 CB Word 2
+(Destination Address)","32"
+"0x514","5_TXFR_LEN","DMA Channel 5 CB Word 3
+(Transfer Length)","32"
+"0x518","5_STRIDE","DMA Channel 5 CB Word 4
+(2D Stride)","32"
+"0x51C","5_NEXTCONBK","DMA Channel 5 CB Word 5
+(Next CB Address)","32"
+"0x520","5_DEBUG","DMA Channel 5 Debug","32"
+"0x600","6_CS","DMA Channel 6 Control and Status","32"
+"0x604","6_CONBLK_AD","DMA Channel 6 Control Block Address","32"
+"0x608","6_TI","DMA Channel 6 CB Word 0
+(Transfer Information)","32"
+"0x60C","6_SOURCE_AD","DMA Channel 6 CB Word 1
+(Source Address)","32"
+"0x610","6_DEST_AD","DMA Channel 6 CB Word 2
+(Destination Address)","32"
+"0x614","6_TXFR_LEN","DMA Channel 6 CB Word 3
+(Transfer Length)","32"
+"0x618","6_STRIDE","DMA Channel 6 CB Word 4
+(2D Stride)","32"
+"0x61C","6_NEXTCONBK","DMA Channel 6 CB Word 5
+(Next CB Address)","32"
+"0x620","6_DEBUG","DMA Channel 6 Debug","32"
+"0x700","7_CS","DMA Lite Channel 7 Control and Status","32"
+"0x704","7_CONBLK_AD","DMA Lite Channel 7 Control Block Address","32"
+"0x708","7_TI","DMA Lite Channel 7 CB Word 0
+(Transfer Information)","32"

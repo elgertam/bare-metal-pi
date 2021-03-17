@@ -1,0 +1,15 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"31:30","GPIO_PUP_PDN_C
+NTRL31","Resistor Select for GPIO31
+00 = No resistor is selected
+01 = Pull up resistor is selected
+10 = Pull down resistor is selected
+11 = Reserved","RW","0x2"
+"29:28","GPIO_PUP_PDN_C
+NTRL30","Resistor Select for GPIO30","RW","0x2"
+"27:26","GPIO_PUP_PDN_C
+NTRL29","Resistor Select for GPIO29","RW","0x2"
+"25:24","GPIO_PUP_PDN_C
+NTRL28","Resistor Select for GPIO28","RW","0x2"
+"23:22","GPIO_PUP_PDN_C
+NTRL27","Resistor Select for GPIO27","RW","0x2"

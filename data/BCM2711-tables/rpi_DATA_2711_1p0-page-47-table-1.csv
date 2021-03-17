@@ -1,0 +1,11 @@
+"32-bit
+Word
+Offset","Description","Associated Read-Only
+Register"
+"1","Source Address","SRC"
+"2","Source Information","SRCI"
+"3","Destination Address","DEST"
+"4","Destination Information","DESTI"
+"5","Transfer Length","LEN"
+"6","Next Control Block Address","NEXT_CB"
+"7","Reserved – set to zero.","N/A"

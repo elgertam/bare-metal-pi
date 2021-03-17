@@ -1,0 +1,7 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"31:30","","Reserved - Write as 0, read as don't care","",""
+"29:16","YLENGTH","When in 2D mode, This is the Y transfer length, 
+indicating how many xlength transfers are performed. 
+When in normal linear mode this becomes the top bits 
+of the XLENGTH","RW","0x0"
+"15:0","XLENGTH","Transfer Length in bytes.","RW","0x0"

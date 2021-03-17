@@ -1,0 +1,39 @@
+"31:27","","Reserved - Write as 0, read as don't care","",""
+"26","NO_WIDE_BURSTS","Don t Do wide writes as a 2 beat burst 
+This prevents the DMA from issuing wide writes as 2 
+beat AXI bursts. This is an inefficient access mode, so 
+the default is to use the bursts.","RW","0x0"
+"25:21  WAITS","","Add Wait Cycles 
+This slows down the DMA throughput by setting the 
+number of dummy cycles burnt after each DMA read 
+or write operation is completed. 
+A value of 0 means that no wait cycles are to be 
+added.","RW","0x0"
+"20:16","PERMAP","Peripheral Mapping 
+Indicates the peripheral number (1-31) whose ready 
+signal shall be used to control the rate of the 
+transfers, and whose panic signals will be output on 
+the DMA AXI bus. Set to 0 for a continuous un-paced 
+transfer.","RW","0x0"
+"15:12","BURST_LENGTH","Burst Transfer Length 
+Indicates the burst length of the DMA transfers. The 
+DMA will attempt to transfer data as bursts of this 
+number of words. A value of zero will produce a single 
+transfer. Bursts are only produced for specific 
+conditions, see main text.","RW","0x0"
+"11","SRC_IGNORE","Ignore Reads 
+1 = Do not perform source reads. In addition, 
+destination writes will zero all the write strobes. This 
+is used for fast cache fill operations. 
+0 = Perform source reads..","RW","0x0"
+"10","SRC_DREQ","Control Source Reads with DREQ 
+1 = The DREQ selected by PER_MAP will gate the 
+source reads. 
+0 = DREQ has no effect.","RW","0x0"
+"9","SRC_WIDTH","Source Transfer Width 
+1 = Use 128-bit source read width. 
+0 = Use 32-bit source read width.","RW","0x0"
+"8","SRC_INC","Source Address Increment 
+1 = Source address increments after each read. The 
+address will increment by 4, if S_WIDTH=0 else by 32. 
+0 = Source address does not change.","RW","0x0"

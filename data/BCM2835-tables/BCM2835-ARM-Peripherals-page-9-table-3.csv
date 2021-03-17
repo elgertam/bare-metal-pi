@@ -1,0 +1,14 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"31:3","","Reserved, write zero, read as don’t care","",""
+"2","SPI2 enable","If set the SPI 2 module is enabled. 
+If clear the SPI 2 module is disabled. That also 
+disables any SPI 2 module register access","R/W","0"
+"1","SPI 1 enable","If set the SPI 1 module is enabled. 
+If clear the SPI 1 module is disabled. That also 
+disables any SPI 1 module register access","R/W","0"
+"0","Mini UART 
+enable","If set the mini UART is enabled. The UART will 
+immediately start receiving data, especially if the 
+UART1_RX line is low. 
+If clear the mini UART is disabled. That also disables 
+any mini UART register access","R/W","0"

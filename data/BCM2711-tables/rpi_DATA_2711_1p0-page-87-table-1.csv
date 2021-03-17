@@ -1,0 +1,76 @@
+"Address
+Offset","Register Name","Description","Size"
+"0x00","GPFSEL0","GPIO Function Select 0","32"
+"0x04","GPFSEL1","GPIO Function Select 1","32"
+"0x08","GPFSEL2","GPIO Function Select 2","32"
+"0x0C","GPFSEL3","GPIO Function Select 3","32"
+"0x10","GPFSEL4","GPIO Function Select 4","32"
+"0x14","GPFSEL5","GPIO Function Select 5","32"
+"0x18
+-
+Reserved
+-","","",""
+"0x1C
+GPSET0
+GPIO Pin Output Set 0
+32","","",""
+"0x20
+GPSET1
+GPIO Pin Output Set 1
+32","","",""
+"0x24
+-
+Reserved
+-","","",""
+"0x28
+GPCLR0
+GPIO Pin Output Clear 0
+32","","",""
+"0x2C
+GPCLR1
+GPIO Pin Output Clear 1
+32","","",""
+"0x30
+-
+Reserved
+-","","",""
+"0x34
+GPLEV0
+GPIO Pin Level 0
+32","","",""
+"0x38
+GPLEV1
+GPIO Pin Level 1
+32","","",""
+"0x3C
+-
+Reserved
+-","","",""
+"0x40
+GPEDS0
+GPIO Pin Event Detect Status 0
+32","","",""
+"0x44
+GPEDS1
+GPIO Pin Event Detect Status 1
+32","","",""
+"0x48
+-
+Reserved
+-","","",""
+"0x4C
+GPREN0
+GPIO Pin Rising Edge Detect Enable 0
+32","","",""
+"0x50
+GPREN1
+GPIO Pin Rising Edge Detect Enable 1
+32","","",""
+"0x54
+-
+Reserved
+-","","",""
+"0x58
+GPFEN0
+GPIO Pin Falling Edge Detect Enable 0
+32","","",""

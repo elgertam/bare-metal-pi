@@ -1,0 +1,15 @@
+"Bit(s)
+Field Name
+Description
+Type
+Reset","","","",""
+"31:20
+Reserved - Write as 0, read as don’t care","","","",""
+"19:18","GPIO_PUP_PDN_C
+NTRL57","Resistor Select for GPIO57
+00 = No resistor is selected
+01 = Pull up resistor is selected
+10 = Pull down resistor is selected
+11 = Reserved","RW","0x2"
+"17:16","GPIO_PUP_PDN_C
+NTRL56","Resistor Select for GPIO56","RW","0x2"

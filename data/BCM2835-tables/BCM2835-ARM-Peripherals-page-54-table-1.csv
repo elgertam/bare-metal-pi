@@ -1,0 +1,9 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"31:16","D_STRIDE","Destination Stride (2D Mode) 
+Signed (2 s complement) byte increment to apply to 
+the destination address at the end of each row in 2D 
+mode.","RW","0x0"
+"15:0","S_STRIDE","Source Stride (2D Mode) 
+Signed (2 s complement) byte increment to apply to 
+the source address at the end of each row in 2D 
+mode.","RW","0x0"

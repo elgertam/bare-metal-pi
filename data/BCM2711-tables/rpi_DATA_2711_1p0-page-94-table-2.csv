@@ -1,0 +1,3 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"31:0","EDSn (n=0..31)","0 = Event not detected on GPIO pin n
+1 = Event detected on GPIO pin n","W1C","0"

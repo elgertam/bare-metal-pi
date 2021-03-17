@@ -1,0 +1,11 @@
+"Bit(s)
+Field Name
+Description
+Type
+Reset","","","",""
+"31:26
+Reserved - Write as 0, read as don’t care","","","",""
+"25:0","ARENn (n=32..57)","0 = Asynchronous rising edge detect disabled on GPIO
+pin n
+1 = Asynchronous rising edge on GPIO pin n sets
+corresponding bit in GPEDS1","RW","0"

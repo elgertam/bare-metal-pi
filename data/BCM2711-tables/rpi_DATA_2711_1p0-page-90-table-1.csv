@@ -1,0 +1,5 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"11:9","FSEL13","FSEL13 - Function Select 13","RW","0"
+"8:6","FSEL12","FSEL12 - Function Select 12","RW","0"
+"5:3","FSEL11","FSEL11 - Function Select 11","RW","0"
+"2:0","FSEL10","FSEL10 - Function Select 10","RW","0"

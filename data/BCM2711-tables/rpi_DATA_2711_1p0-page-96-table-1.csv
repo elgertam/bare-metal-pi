@@ -1,0 +1,4 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"25:0","FENn (n=32..57)","0 = Falling edge detect disabled on GPIO pin n
+1 = Falling edge on GPIO pin n sets corresponding bit in
+GPEDS1","RW","0"

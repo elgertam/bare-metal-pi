@@ -1,0 +1,6 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"31:3","","Reserved, write zero, read as don’t care","",""
+"2","SPI 2 IRQ","If set the SPI 2 module has an interrupt pending.","R","0"
+"1","SPI 1 IRQ","If set the SPI1 module has an interrupt pending.","R","0"
+"0","Mini UART 
+IRQ","If set the mini UART has an interrupt pending.","R","0"

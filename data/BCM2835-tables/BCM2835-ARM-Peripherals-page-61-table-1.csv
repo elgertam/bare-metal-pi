@@ -1,0 +1,11 @@
+"DREQ","Peripheral"
+"0","DREQ = 1 
+This is always on so use this 
+channel if no DREQ is required."
+"1","DSI"
+"2","PCM TX"
+"3","PCM RX"
+"4","SMI"
+"5","PWM"
+"6","SPI TX"
+"7","SPI RX"

@@ -1,0 +1,13 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"31","RESET","DMA Channel Reset 
+Writing a 1 to this bit will reset the DMA. 
+The bit cannot be read, and will self 
+clear.","W1SC","0x0"
+"30","ABORT","Abort DMA 
+Writing a 1 to this bit will abort the 
+current DMA CB. The DMA will load the 
+next CB and attempt to continue. The bit 
+cannot be read, and will self clear.","W1SC","0x0"
+"29","DISDEBUG","Disable debug pause signal 
+When set to 1, the DMA will not stop 
+when the debug pause signal is asserted.","RW","0x0"

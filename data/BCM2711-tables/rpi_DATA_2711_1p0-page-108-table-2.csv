@@ -1,0 +1,29 @@
+"Bit(s)
+Field Name
+Description
+Type
+Reset","","","",""
+"31:24
+PASSWD
+Clock Manager password ""5a""
+WO
+0","","","",""
+"23:11
+Reserved - Write as 0, read as don’t care","","","",""
+"10:9","MASH","MASH control
+0 = integer division
+1 = 1-stage MASH (equivalent to non-MASH dividers)
+2 = 2-stage MASH
+3 = 3-stage MASH
+To avoid lock-ups and glitches do not change this
+control while BUSY=1 and do not change this control at
+the same time as asserting ENAB.","RW","0"
+"8","FLIP","Invert the clock generator output
+This is intended for use in test/debug only. Switching
+this control will generate an edge on the clock
+generator output. To avoid output glitches do not switch
+this control while BUSY=1.","RW","0"
+"7","BUSY","Clock generator is running
+Indicates the clock generator is running. To avoid
+glitches and lock-ups, clock sources and setups must not
+be changed while this flag is set.","RO","0"

@@ -1,0 +1,3 @@
+"Bit(s)","Field Name","Description","Type","Reset"
+"31:0","LEVn (n=0..31)","0 = GPIO pin n is low
+1 = GPIO pin n is high","RO","0"

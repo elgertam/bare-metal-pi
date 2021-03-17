@@ -1,0 +1,19 @@
+"4","DEST_INC","Destination Address Increment 
+1 = Destination address increments after each write 
+The address will increment by 4, if DEST_WIDTH=0 
+else by 32. 
+0 = Destination address does not change.","RW","0x0"
+"3","WAIT_RESP","Wait for a Write Response 
+When set this makes the DMA wait until it receives 
+the AXI write response for each write. This ensures 
+that multiple writes cannot get stacked in the AXI bus 
+pipeline. 
+1= Wait for the write response to be received before 
+proceeding. 
+0 = Don t wait; continue as soon as the write data is 
+sent.","RW","0x0"
+"2:1","","Reserved - Write as 0, read as don't care","",""
+"0","INTEN","Interrupt Enable 
+1 = Generate an interrupt when the transfer described 
+by the current Control Block completes. 
+0 = Do not generate an interrupt.","RW","0x0"
