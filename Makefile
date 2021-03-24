@@ -22,6 +22,9 @@ clean :
 clean-all: clean
 	rm -rf $(DIST_DIR)
 
+eject :
+	diskutil unmount /Volumes/system-boot
+
 $(BUILD_DIR)/%_c.o: $(SRC_DIR)/%.c
 	mkdir -p $(@D)
 	$(ARMGNU)-gcc $(COPS) -MMD -c $< -o $@
