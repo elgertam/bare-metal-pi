@@ -11,8 +11,6 @@ ASMOPS = -Iinclude
 BUILD_DIR = build
 SRC_DIR = src
 DIST_DIR = dist
-ARMSTUB_BUILD_DIR = armstub/build
-ARMSTUB_SRC_DIR = armstub/src
 
 all : kernel8.img armstub
 
@@ -37,29 +35,6 @@ $(ARMSTUB_BUILD_DIR)/%_s.o: $(ARMSTUB_SRC_DIR)/%.S
 	mkdir -p $(@D)
 	$(ARMGNU)-gcc $(COPS) -MMD -c $< -o $@
 
-ARMSTUB_ASM_FILES = $(wildcard $(ARMSTUB_SRC_DIR)/%.S)
-ARMSTUB_OBJ_FILES = $(wildcard $(ARMSTUB_BUILD_DIR)/*_s.o)
-
-ARMSTUB_DEP_FILES = $(ARMSTUB_OBJ_FILES:%.o=%.d)
--include $(ARMSTUB_DEP_FILES)
-
-# TODO: Determine why this doesn't work
-# armstub: $(ARMSTUB_OBJ_FILES)
-	# mkdir -p $(DIST_DIR)
-	# $(ARMGNU)-ld --section-start=.text=0 -o $(ARMSTUB_BUILD_DIR)/armstub.elf $(ARMSTUB_OBJ_FILES)
-	# $(ARMGNU)-objcopy $(ARMSTUB_BUILD_DIR)/armstub.elf -O binary $(DIST_DIR)/armstub-new.bin
-	# mkdir -p $(BOOTMNT)
-	# cp $(DIST_DIR)/armstub-new.bin $(BOOTMNT)/
-	# sync
-
-armstub: $(ARMSTUB_BUILD_DIR)/armstub_s.o
-	mkdir -p $(DIST_DIR)
-	$(ARMGNU)-ld --section-start=.text=0 -o $(ARMSTUB_BUILD_DIR)/armstub.elf $(ARMSTUB_BUILD_DIR)/armstub_s.o
-	$(ARMGNU)-objcopy $(ARMSTUB_BUILD_DIR)/armstub.elf -O binary $(DIST_DIR)/armstub-new.bin
-	mkdir -p $(BOOTMNT)
-	cp $(DIST_DIR)/armstub-new.bin $(BOOTMNT)/
-	sync
-
 C_FILES = $(wildcard $(SRC_DIR)/*.c)
 ASM_FILES = $(wildcard $(SRC_DIR)/*.S)
 OBJ_FILES = $(C_FILES:$(SRC_DIR)/%.c=$(BUILD_DIR)/%_c.o)
@@ -67,6 +42,12 @@ OBJ_FILES += $(ASM_FILES:$(SRC_DIR)/%.S=$(BUILD_DIR)/%_s.o)
 
 DEP_FILES = $(OBJ_FILES:%.o=%.d)
 -include $(DEP_FILES)
+
+ARMSTUB_FILES = $(wildcard armstub/$(SRC_DIR)/*.S)
+ARMSTUB_OBJ_FILES = $(ARMSTUB_FILES:armstub/$(SRC_DIR)/%.S=armstub/$(BUILD_DIR)/%_s.o)
+
+ARMSTUB_DEP_FILES = $(ARMSTUB_OBJ_FILES:%.o=%.d)
+-include $(ARMSTUB_DEP_FILES)
 
 kernel8.img: $(SRC_DIR)/linker.ld $(OBJ_FILES)
 	mkdir -p $(DIST_DIR)
@@ -81,4 +62,12 @@ ifeq ($(RPI_VERSION), 4)
 	mv $(DIST_DIR)/kernel8.img $(DIST_DIR)/kernel8-rpi4.img
 endif
 	cp $(DIST_DIR)/* $(BOOTMNT)/
+	sync
+
+armstub: $(ARMSTUB_OBJ_FILES)
+	mkdir -p $(DIST_DIR)
+	$(ARMGNU)-ld --section-start=.text=0 -o armstub/$(BUILD_DIR)/armstub.elf $(ARMSTUB_OBJ_FILES)
+	$(ARMGNU)-objcopy armstub/$(BUILD_DIR)/armstub.elf -O binary $(DIST_DIR)/armstub-new.bin
+	mkdir -p $(BOOTMNT)
+	cp $(DIST_DIR)/armstub-new.bin $(BOOTMNT)/
 	sync
