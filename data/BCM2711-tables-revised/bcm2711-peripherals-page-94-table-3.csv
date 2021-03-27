@@ -1,0 +1,6 @@
+"Bits","Name","Description","Type","Reset"
+"31:21","Reserved.","-","-","-"
+"20","AXI_QUIET_IRQ_E
+NB","1: Enable Core 0 IRQ on AXI quiet timer expiry
+0: Disable Core 0 IRQ on AXI quiet timer expiry","RW","0x0"
+"19:00","AXI_QUIET_TIME","Timer load value, in units of 16 AXI/APB clock cycles.","RW","0x00000"

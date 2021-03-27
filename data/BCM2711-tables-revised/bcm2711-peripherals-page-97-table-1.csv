@@ -1,0 +1,45 @@
+"Bits","Name","Description","Type","Reset"
+"06","MBOX2_FIQ","When set to '1', this bit causes the third mailbox, i.e.
+mailbox 4C+2 for ARM core number C, (so mailbox 2 for
+ARM core 0, 6 for ARM core 1, etc.) to trigger a FIQ
+interrupt when any bit is set in the mailbox.","RW","0x0"
+"05","MBOX1_FIQ","When set to '1', this bit causes the second mailbox, i.e.
+mailbox 4C+1 for ARM core number C, (so mailbox 1 for
+ARM core 0, 5 for ARM core 1, etc.) to trigger a FIQ
+interrupt when any bit is set in the mailbox.","RW","0x0"
+"04","MBOX0_FIQ","When set to '1', this bit causes the first mailbox, i.e. mailbox
+4C for ARM core number C, (so mailbox 0 for ARM core 0, 4
+for ARM core 1, etc.) to trigger a FIQ interrupt when any bit
+is set in the mailbox.","RW","0x0"
+"03","MBOX3_IRQ","When set to '1', this bit causes the fourth mailbox, i.e.
+mailbox 4C+3 for ARM core number C, (so mailbox 3 for
+ARM core 0, 7 for ARM core 1, etc.) to trigger an IRQ
+interrupt when any bit is set in the mailbox. Note that this is
+overridden by the corresponding FIQ bit: a particular event
+may be routed either to the FIQ or IRQ request pin, not both.
+If the FIQ bit is set, then the event will be routed to the FIQ
+request pin only, irrespective of the state of this bit.","RW","0x0"
+"02","MBOX2_IRQ","When set to '1', this bit causes the third mailbox, i.e.
+mailbox 4C+2 for ARM core number C, (so mailbox 2 for
+ARM core 0, 6 for ARM core 1, etc.) to trigger an IRQ
+interrupt when any bit is set in the mailbox. Note that this is
+overridden by the corresponding FIQ bit: a particular event
+may be routed either to the FIQ or IRQ request pin, not both.
+If the FIQ bit is set, then the event will be routed to the FIQ
+request pin only, irrespective of the state of this bit.","RW","0x0"
+"01","MBOX1_IRQ","When set to '1', this bit causes the second mailbox, i.e.
+mailbox 4C+1 for ARM core number C, (so mailbox 1 for
+ARM core 0, 5 for ARM core 1, etc.) to trigger an IRQ
+interrupt when any bit is set in the mailbox. Note that this is
+overridden by the corresponding FIQ bit: a particular event
+may be routed either to the FIQ or IRQ request pin, not both.
+If the FIQ bit is set, then the event will be routed to the FIQ
+request pin only, irrespective of the state of this bit.","RW","0x0"
+"00","MBOX0_IRQ","When set to '1', this bit causes the first mailbox, i.e. mailbox
+4C for ARM core number C, (so mailbox 0 for ARM core 0, 4
+for ARM core 1, etc.) to trigger an IRQ interrupt when any
+bit is set in the mailbox. Note that this is overridden by the
+corresponding FIQ bit: a particular event may be routed
+either to the FIQ or IRQ request pin, not both. If the FIQ bit is
+set, then the event will be routed to the FIQ request pin only,
+irrespective of the state of this bit.","RW","0x0"

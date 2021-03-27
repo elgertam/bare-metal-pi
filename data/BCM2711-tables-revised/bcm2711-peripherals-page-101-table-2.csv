@@ -1,0 +1,10 @@
+"Bits","Name","Description","Type","Reset"
+"31","IRQ","This is the value of the ARM interrupt input","RO","0x0"
+"30:26","Reserved.","-","-","-"
+"25","INT63_32","This bit is the logical OR of all the interrupt pending bits for
+interrupts 63 to 32. If set, read the PENDING1 register to
+determine which interrupts are pending from this set.","RO","0x0"
+"24","INT31_0","This bit is the logical OR of all the interrupt pending bits for
+interrupts 31 to 0. If set, read the PENDING0 register to
+determine which interrupts are pending from this set.","RO","0x0"
+"23:16","Reserved.","-","-","-"

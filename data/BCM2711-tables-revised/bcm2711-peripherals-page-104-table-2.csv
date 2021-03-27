@@ -1,0 +1,8 @@
+"Bits","Name","Description","Type","Reset"
+"31","IRQ","This is the value of the ARM interrupt input","RO","0x0"
+"30:16","Reserved.","-","-","-"
+"15:08","SW_TRIG_INT","These eight bits are software-triggered interrupts. By
+writing to the SWIRQ_SET register, software may set
+interrupt trigger bits. These interrupts can only be cleared
+by clearing the trigger bit by writing to the SWIRQ_CLEAR
+register.","RO","0x00"

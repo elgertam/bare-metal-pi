@@ -1,0 +1,6 @@
+"Bits","Name","Description","Type","Reset"
+"31:8","Reserved.","-","-","-"
+"07","MBOX3_FIQ","When set to '1', this bit causes the fourth mailbox, i.e.
+mailbox 4C+3 for ARM core number C, (so mailbox 3 for
+ARM core 0, 7 for ARM core 1, etc.) to trigger a FIQ
+interrupt when any bit is set in the mailbox.","RW","0x0"

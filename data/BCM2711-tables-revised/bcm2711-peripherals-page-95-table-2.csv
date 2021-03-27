@@ -1,0 +1,8 @@
+"Bits","Name","Description","Type","Reset"
+"31","IRQ_CLEAR","Write a '1' to this field to clear a timer interrupt request. If
+the timer crosses zero at the same time as the write, the
+clear operation will fail; interrupt request will remain
+asserted. This bit self-clears.","W1SC","0x0"
+"30","RELOAD","Write a '1' to this field to (re)load the timer with the timeout
+value. This bit self-clears.","W1SC","0x0"
+"29:0","Reserved.","-","-","-"

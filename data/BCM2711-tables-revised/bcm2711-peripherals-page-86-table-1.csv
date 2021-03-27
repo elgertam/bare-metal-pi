@@ -1,0 +1,65 @@
+"#","IRQ 0-63",
+"0","Timer 0"
+"1","Timer 1"
+"2","Timer 2",
+"3","Timer 3",
+"4","H264 0",
+"5","H264 1",
+"6","H264 2",
+"7","JPEG",
+"8","ISP",
+"9","USB",
+"10","V3D",
+"11","Transposer",
+"12","Multicore Sync 0",
+"13","MultiCore Sync 1",
+"14","MultiCore Sync 2",
+"15","MultiCore Sync 3",
+"16","DMA 0",
+"17","DMA 1"
+"18","DMA 2",
+"19","DMA 3",
+"20","DMA 4",
+"21","DMA 5",
+"22","DMA 6",
+"23","DMA 7 & 8",
+"24","DMA 9 & 10",
+"25","DMA 11",
+"26","DMA 12",
+"27","DMA 13",
+"28","DMA 14",
+"29","AUX",
+"30","ARM",
+"31","DMA 15",
+"32","HDMI CEC",
+"33","HVS"
+"34","RPIVID",
+"35","SDC",
+"36","DSI 0",
+"37","Pixel Valve 2",
+"38","Camera 0",
+"39","Camera 1",
+"40","HDMI 0",
+"41","HDMI 1",
+"42","Pixel Valve 3",
+"43","SPI/BSC Slave",
+"44","DSI 1",
+"45","Pixel Valve 0",
+"46","Pixel Valve 1 & 4",
+"47","CPR",
+"48","SMI"
+"49","GPIO 0"
+"50","GPIO 1"
+"51","GPIO 2"
+"52","GPIO 3"
+"53","OR of all I2C"
+"54","OR of all SPI"
+"55","PCM/I2S"
+"56","SDHOST"
+"57","OR of all PL011 UART"
+"58","OR of all ETH_PCIe L2"
+"59","VEC"
+"60","CPG"
+"61","RNG"
+"62","EMMC & EMMC2"
+"63","ETH_PCIe

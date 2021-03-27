@@ -1,0 +1,16 @@
+"Bits","Name","Description","Type","Reset"
+"31:7","Reserved.","-","-","-"
+"06:04","AXI_ERR_CORE","Controls to which ARM core interrupt request pin the
+external error interrupt request signal from the ARM L2
+cache is routed.
+This interrupt is enabled in the AXIERRIRQ_EN field in the
+ARM_CONTROL register.
+0 = CORE0_IRQ
+1 = CORE1_IRQ
+2 = CORE2_IRQ
+3 = CORE3_IRQ
+4 = CORE0_FIQ
+5 = CORE1_FIQ
+6 = CORE2_FIQ
+7 = CORE3_FIQ","RW","0x0"
+"3:0","Reserved.","-","-","-"

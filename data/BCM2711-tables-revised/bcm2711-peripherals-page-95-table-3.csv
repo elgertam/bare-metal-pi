@@ -1,0 +1,7 @@
+"Bits","Name","Description","Type","Reset"
+"31:8","Reserved.","-","-","-"
+"07","CNT_V_IRQ_FIQ","When set to '1', this bit causes the 'Virtual Timer Event'
+output to be routed to the FIQ interrupt request.","RW","0x0"
+"06","CNT_HP_IRQ_FIQ","When set to '1', this bit causes the 'Hypervisor Physical
+Timer Event' output to be routed to the FIQ interrupt
+request.","RW","0x0"

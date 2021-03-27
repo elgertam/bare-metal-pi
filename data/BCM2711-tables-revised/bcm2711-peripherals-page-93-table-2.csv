@@ -1,0 +1,13 @@
+"Bits","Name","Description","Type","Reset"
+"31:8","Reserved.","-","-","-"
+"07:04","PMU_FIQ","PMU to FIQ routing mask.
+Setting bit N within this four bit field routes the PMUIRQ
+output from ARM core N to the FIQ interrupt request on
+that ARM core.","RW","0x0"
+"03:00","PMU_IRQ","PMU to IRQ routing mask
+Setting bit N within this four bit field routes the PMUIRQ
+output from ARM core N to the IRQ interrupt request on
+that ARM core. Note that it is not possible to route the PMU
+interrupt to both the FIQ and IRQ request pins: setting a bit
+in the PMU_FIQ field causes the request to go to the core’s
+FIQ pin only, irrespective of this field.","RW","0x0"

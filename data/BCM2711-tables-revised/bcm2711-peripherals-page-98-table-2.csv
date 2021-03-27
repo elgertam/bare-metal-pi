@@ -1,0 +1,15 @@
+"Bits","Name","Description","Type","Reset"
+"31","Reserved.","-","-","-"
+"30","AXI_FIQ","AXI error, as reported by the ARM L2 cache.","RO","0x0"
+"29:12","Reserved.","-","-","-"
+"11","LOCAL_TIMER_FI
+Q","Local timer interrupt.","RO","0x0"
+"10","Reserved.","-","-","-"
+"09","PMU_FIQ","Performance measurement unit interrupt.","RO","0x0"
+"08","CORE_FIQ","VideoCore interrupt request.","RO","0x0"
+"07:04","MAILBOX_FIQ","Mailbox interrupts: bit 4 is the first of the core’s mailboxes,
+bit 7 is the fourth.","RO","0x0"
+"03","CNT_V_FIQ","Virtual Timer Event interrupt.","RO","0x0"
+"02","CNT_HP_FIQ","Hypervisor Physical Timer Event interrupt.","RO","0x0"
+"01","CNT_PNS_FIQ","Nonsecure Physical Timer Event interrupt.","RO","0x0"
+"00","CNT_PS_FIQ","Secure Physical Timer Event interrupt.","RO","0x0"

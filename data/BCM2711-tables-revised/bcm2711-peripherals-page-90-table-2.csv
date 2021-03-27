@@ -1,0 +1,47 @@
+"","","","","","","","","",""
+"Masked FIQn/IRQn Status
+(repeated 8 times)","","","","","","","","",""
+"","ARMC status registers
+Masked ARMC peripheral 0-15
+16
+FIQn/IRQn_PENDING0
+0..31
+Masked VC peripheral 0-31
+32
+32
+FIQn/IRQn_PENDING1
+0..31
+Masked VC peripheral 32-63","","","","","ARM_LOCAL status registers
+Masked PS timer
+Masked PNS timer
+Masked HP timer
+Masked V timer
+Masked Mailbox 0
+Masked Mailbox 1
+Masked Mailbox 2
+Masked Mailbox 3
+Masked PMU
+Masked AXI_QUIET
+(for IRQ0 only)
+Masked Local timer
+Masked AXIERR","","",""
+"","","FIQn/IRQn_PENDING2
+0..15
+24
+18
+25
+31","","","","","8 9 1
+0 1 2 3
+4 5 6 7
+FIQ/IRQ_SOURCEn
+13
+0
+11
+30","",""
+"","","","","","","","","",""
+"","","","","","","","","",""
+"","","","","","","","","",""
+"","","","","","","","","",""
+"","","","","","","","","",""
+"","32
+32","","","","","","","",""

@@ -1,0 +1,13 @@
+"Bits","Name","Description","Type","Reset"
+"31","TIMER_IRQ_FLAG","This read-only field allows software to see the current state
+of the timer interrupt request. A '1' indicates a valid
+interrupt request.","RO","0x0"
+"30","Reserved.","-","-","-"
+"29","TIMER_IRQ_EN","Interrupt request enable.
+When set to '1', this bit causes the timer to request an
+interrupt as the timer crosses zero.","RW","0x0"
+"28","TIMER_EN","Timer Enable
+When set to '1', this bit enables to the timer. When cleared
+to '0', timer operation is completely disabled: the timer does
+not decrement or raise interrupt requests.","RW","0x0"
+"27:00","TIMER_TIMEOUT","Timer load value.","RW","0x0000000"

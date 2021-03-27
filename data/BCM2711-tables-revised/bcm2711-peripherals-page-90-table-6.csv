@@ -1,0 +1,5 @@
+"Old bit value","Write bit value","Result bit value"
+"0","0","0"
+"0","1","1"
+"1","0","1"
+"1","1","1"

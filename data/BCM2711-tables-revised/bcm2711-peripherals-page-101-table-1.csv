@@ -1,0 +1,7 @@
+"Offset","Name","Description"
+"0x3d8","FIQ3_SET_EN_2","Write to Set ARM Core 3 FIQ enable bits[79:64]"
+"0x3e0","FIQ3_CLR_EN_0","Write to Clear ARM Core 3 FIQ enable bits [31:0]"
+"0x3e4","FIQ3_CLR_EN_1","Write to Clear ARM Core 3 FIQ enable bits [63:32]"
+"0x3e8","FIQ3_CLR_EN_2","Write to Clear ARM Core 3 FIQ enable bits [79:64]"
+"0x3f0","SWIRQ_SET","Write to Set Software Interrupt sources"
+"0x3f4","SWIRQ_CLEAR","Write to Clear Software Interrupt sources"

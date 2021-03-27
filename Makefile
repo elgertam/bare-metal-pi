@@ -31,7 +31,7 @@ $(BUILD_DIR)/%_s.o: $(SRC_DIR)/%.S
 	mkdir -p $(@D)
 	$(ARMGNU)-gcc $(COPS) -MMD -c $< -o $@
 
-$(ARMSTUB_BUILD_DIR)/%_s.o: $(ARMSTUB_SRC_DIR)/%.S
+armstub/$(BUILD_DIR)/%_s.o: armstub/$(SRC_DIR)/%.S
 	mkdir -p $(@D)
 	$(ARMGNU)-gcc $(COPS) -MMD -c $< -o $@
 
@@ -71,3 +71,5 @@ armstub: $(ARMSTUB_OBJ_FILES)
 	mkdir -p $(BOOTMNT)
 	cp $(DIST_DIR)/armstub-new.bin $(BOOTMNT)/
 	sync
+
+.PHONY: armstub all clean clean-all eject

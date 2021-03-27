@@ -1,0 +1,16 @@
+"Bits","Name","Description","Type","Reset"
+"31","Reserved.","-","-","-"
+"30","AXI_IRQ","AXI error, as reported by the ARM L2 cache.","RO","0x0"
+"29:12","Reserved.","-","-","-"
+"11","TIMER_IRQ","Local timer interrupt.","RO","0x0"
+"10","AXI_QUIET","No AXI outstanding requests have been seen for the time-
+out period.
+Present for Core 0 only. Reserved for others.","RO","0x0"
+"09","PMU_IRQ","Performance measurement unit interrupt.","RO","0x0"
+"08","CORE_IRQ","VideoCore interrupt request.","RO","0x0"
+"07:04","MAILBOX_IRQ","Mailbox interrupts: bit 4 is the first of the core’s mailboxes,
+bit 7 is the fourth.","RO","0x0"
+"03","CNT_V_IRQ","Virtual Timer Event interrupt.","RO","0x0"
+"02","CNT_HP_IRQ","Hypervisor Physical Timer Event interrupt.","RO","0x0"
+"01","CNT_PNS_IRQ","Nonsecure Physical Timer Event interrupt.","RO","0x0"
+"00","CNT_PS_IRQ","Secure Physical Timer Event interrupt.","RO","0x0"

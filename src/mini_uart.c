@@ -12,11 +12,11 @@ void uart_init() {
     gpio_pin_enable(TXD);
     gpio_pin_enable(RXD);
 
-    REGS_AUX->enables = 1;
-    REGS_AUX->mu_control = 0;
-    REGS_AUX->mu_ier = 2;
-    REGS_AUX->mu_lcr = 3;
-    REGS_AUX->mu_mcr = 0;
+    REGS_AUX->enables =     0x1;
+    REGS_AUX->mu_control =  0x0;
+    REGS_AUX->mu_ier =      0xD;
+    REGS_AUX->mu_lcr =      0x3;
+    REGS_AUX->mu_mcr =      0x0;
 
 #if RPI_VERSION == 3
     REGS_AUX->mu_baud_rate = 270; // = 115200 @ 250MHz

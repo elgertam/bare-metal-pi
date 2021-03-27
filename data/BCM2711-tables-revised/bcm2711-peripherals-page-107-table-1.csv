@@ -1,0 +1,31 @@
+"Bits","Name","Description","Type","Reset"
+"25","INT63_32","This bit is the logical OR of all the interrupt pending bits for
+interrupts 63 to 32. If set, read the PENDING1 register to
+determine which interrupts are pending from this set.","RO","0x0"
+"24","INT31_0","This bit is the logical OR of all the interrupt pending bits for
+interrupts 31 to 0. If set, read the PENDING0 register to
+determine which interrupts are pending from this set.","RO","0x0"
+"23:16","Reserved.","-","-","-"
+"15:08","SW_TRIG_INT","These eight bits are software-triggered interrupts. By
+writing to the SWIRQ_SET register, software may set
+interrupt trigger bits. These interrupts can only be cleared
+by clearing the trigger bit by writing to the SWIRQ_CLEAR
+register.","RO","0x00"
+"07","ARM_AXI_ERROR","ARM AXI error interrupt. This is set if the logic in the ARM
+block detects that an AXI error has occurred. This interrupt
+cannot be cleared other than by resetting the ARM
+complex.","RO","0x0"
+"06","ARM_ADDR_ERRO
+R","ARM address range error. This interrupt is set if the ARM
+attempts an AXI burst (ALEN > 0) access to VideoCore
+peripheral space.","RO","0x0"
+"05","VPU_C1_HALT","VPU Core 1 halted in debug mode.","RO","0x0"
+"04","VPU_C0_C1_HALT","VPU Core 0 halted in debug mode, or (if enabled by bit 10
+of the config register) VPU Core 1 halted in debug mode.","RO","0x0"
+"03","BELL_IRQ1","Doorbell 1 interrupt. This interrupt can be cleared by
+reading the relevant doorbell register.","RO","0x0"
+"02","BELL_IRQ0","Doorbell 0 interrupt. This interrupt can be cleared by
+reading the relevant doorbell register.","RO","0x0"
+"01","MAILBOX_IRQ0","Mailbox 0 interrupt.","RO","0x0"
+"00","TIMER_IRQ","Timer interrupt. This interrupt can be cleared by writing to
+the IRQCNTL register.","RO","0x0"

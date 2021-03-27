@@ -1,0 +1,19 @@
+"Bits","Name","Description","Type","Reset"
+"31","IRQ","This is the value of the ARM interrupt input","RW","0x0"
+"30:16","Reserved.","-","-","-"
+"15:08","SW_TRIG_INT","These eight bits are software-triggered interrupts. By
+writing to the SWIRQ_SET register, software may set
+interrupt trigger bits.","RW","0x00"
+"07","ARM_AXI_ERROR","ARM AXI error interrupt. This is set if the logic in the ARM
+block detects that an AXI error has occurred.","RW","0x0"
+"06","ARM_ADDR_ERRO
+R","ARM address range error. This interrupt is set if the ARM
+attempts an AXI burst (ALEN > 0) access to VideoCore
+peripheral space.","RW","0x0"
+"05","VPU_C1_HALT","VPU Core 1 halted in debug mode.","RW","0x0"
+"04","VPU_C0_C1_HALT","VPU Core 0 halted in debug mode, or (if enabled by bit 10
+of the config register) VPU Core 1 halted in debug mode.","RW","0x0"
+"03","BELL_IRQ1","Doorbell 1 interrupt.","RW","0x0"
+"02","BELL_IRQ0","Doorbell 0 interrupt.","RW","0x0"
+"01","MAILBOX_IRQ0","Mailbox 0 interrupt.","RW","0x0"
+"00","TIMER_IRQ","Timer interrupt.","RW","0x0"

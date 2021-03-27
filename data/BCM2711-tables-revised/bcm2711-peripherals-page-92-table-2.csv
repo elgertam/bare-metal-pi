@@ -1,0 +1,27 @@
+"Bits","Name","Description","Type","Reset"
+"31:9","Reserved.","-","-","-"
+"08","TIMER_INCREME
+NT","Main timer increment value selection
+The main timer (driving the ARM core 'global system
+counter') is incremented by this amount each time the
+prescaler output is asserted. The ability to set the
+increment value to two allows the main timer to count ARM
+core clock cycles in the case where the AXI/APB clock
+frequency is half of the ARM core clock frequency and the
+prescaler ratio is unity.
+1 = increment count by two.
+0 = increment count by one.","RW","0x0"
+"07","PROC_CLK_TIMER Main timer clock selection","The main timer (driving the ARM core 'global system
+counter') may be driven either from the fast but variable
+AXI/APB bus clock or from the fixed-frequency but slower
+crystal reference clock.
+1 = select AXI/APB clock.
+0 = select crystal clock.","RW","0x0"
+"06","AXIERRIRQ_EN","When set to '1', this bit masks the AXI Error interrupt. An
+AXI error output is asserted by the ARM’s L2 cache if an
+error response is received. If not masked, this causes an
+interrupt to be raised. If this bit is set, the interrupt is not
+raised.
+Interrupt routing for this is controlled by the AXI_ERR_CORE
+field in the CORE_IRQ_CONTROL register.","RW","0x0"
+"5:0","Reserved.","-","-","-"

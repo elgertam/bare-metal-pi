@@ -1,0 +1,15 @@
+"Bits","Name","Description","Type","Reset"
+"31:24","WRITE_MASKS","Interrupt routing field write mask bits.
+This field must be written with 0x01, otherwise changes to
+LOCAL_TIMER_IRQ will be ignored.","RW","0x00"
+"23:3","Reserved.","-","-","-"
+"02:00","LOCAL_TIMER_IR
+Q","Local timer Routing
+0 = CORE0_IRQ
+1 = CORE1_IRQ
+2 = CORE2_IRQ
+3 = CORE3_IRQ
+4 = CORE0_FIQ
+5 = CORE1_FIQ
+6 = CORE2_FIQ
+7 = CORE3_FIQ","RW","0x0"
