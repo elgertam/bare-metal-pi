@@ -3,6 +3,7 @@
 #include "mini_uart.h"
 #include "printf.h"
 #include "irq.h"
+#include "timer.h"
 
 void putc(void *p, char c) {
     if (c == '\n') {
@@ -20,6 +21,7 @@ void kernel_main() {
     irq_init_vectors();
     enable_interrupt_controller();
     irq_enable();
+    timer_init();
 
 #if RPI_VERSION == 3
     printf("\t Board: Raspberry Pi 3\n");
@@ -31,7 +33,23 @@ void kernel_main() {
 
     printf("\tException Level: %d\n", get_el());
 
-    printf("\n\nDone\n");
+    printf("\n");
+    printf("Sleeping 200ms...\n");
+    timer_sleep(200);
+
+    printf("Sleeping 200ms...\n");
+    timer_sleep(200);
+
+    printf("Sleeping 200ms...\n");
+    timer_sleep(200);
+
+    printf("Sleeping 2s...\n");
+    timer_sleep(2000);
+
+    printf("Sleeping 2s...\n");
+    timer_sleep(2000);
+
+    printf("\nDone\n");
 
     while(1) {
         // uart_send(uart_recv());
