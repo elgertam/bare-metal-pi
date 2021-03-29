@@ -41,13 +41,7 @@ OBJ_FILES += $(ASM_FILES:$(SRC_DIR)/%.S=$(BUILD_DIR)/%_s.o)
 DEP_FILES = $(OBJ_FILES:%.o=%.d)
 -include $(DEP_FILES)
 
-ARMSTUB_FILES = $(wildcard armstub/$(SRC_DIR)/*.S)
-ARMSTUB_OBJ_FILES = $(ARMSTUB_FILES:armstub/$(SRC_DIR)/%.S=armstub/$(BUILD_DIR)/%_s.o)
-
-ARMSTUB_DEP_FILES = $(ARMSTUB_OBJ_FILES:%.o=%.d)
--include $(ARMSTUB_DEP_FILES)
-
-kernel8.img: $(SRC_DIR)/linker.ld $(OBJ_FILES)
+kernel8.img: $(OBJ_FILES)
 	mkdir -p $(DIST_DIR)
 	@echo "Building for RPI $(value RPI_VERSION)"
 	@echo "Deploy to $(value BOOTMNT)"
@@ -61,6 +55,12 @@ endif
 	cp config.txt $(DIST_DIR)/
 	cp $(DIST_DIR)/* $(BOOTMNT)/
 	sync
+
+ARMSTUB_FILES = $(wildcard armstub/$(SRC_DIR)/*.S)
+ARMSTUB_OBJ_FILES = $(ARMSTUB_FILES:armstub/$(SRC_DIR)/%.S=armstub/$(BUILD_DIR)/%_s.o)
+
+ARMSTUB_DEP_FILES = $(ARMSTUB_OBJ_FILES:%.o=%.d)
+-include $(ARMSTUB_DEP_FILES)
 
 armstub: $(ARMSTUB_OBJ_FILES)
 	mkdir -p $(DIST_DIR)

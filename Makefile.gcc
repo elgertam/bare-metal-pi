@@ -43,12 +43,6 @@ OBJ_FILES += $(ASM_FILES:$(SRC_DIR)/%.S=$(BUILD_DIR)/%_s.o)
 DEP_FILES = $(OBJ_FILES:%.o=%.d)
 -include $(DEP_FILES)
 
-ARMSTUB_FILES = $(wildcard armstub/$(SRC_DIR)/*.S)
-ARMSTUB_OBJ_FILES = $(ARMSTUB_FILES:armstub/$(SRC_DIR)/%.S=armstub/$(BUILD_DIR)/%_s.o)
-
-ARMSTUB_DEP_FILES = $(ARMSTUB_OBJ_FILES:%.o=%.d)
--include $(ARMSTUB_DEP_FILES)
-
 kernel8.img: $(SRC_DIR)/linker.ld $(OBJ_FILES)
 	mkdir -p $(DIST_DIR)
 	@echo "Building for RPI $(value RPI_VERSION)"
@@ -64,6 +58,12 @@ endif
 	cp $(DIST_DIR)/* $(BOOTMNT)/
 	sync
 
+ARMSTUB_FILES = $(wildcard armstub/$(SRC_DIR)/*.S)
+ARMSTUB_OBJ_FILES = $(ARMSTUB_FILES:armstub/$(SRC_DIR)/%.S=armstub/$(BUILD_DIR)/%_s.o)
+
+ARMSTUB_DEP_FILES = $(ARMSTUB_OBJ_FILES:%.o=%.d)
+-include $(ARMSTUB_DEP_FILES)
+
 armstub: $(ARMSTUB_OBJ_FILES)
 	mkdir -p $(DIST_DIR)
 	$(ARMGNU)-ld --section-start=.text=0 -o armstub/$(BUILD_DIR)/armstub.elf $(ARMSTUB_OBJ_FILES)
@@ -72,4 +72,4 @@ armstub: $(ARMSTUB_OBJ_FILES)
 	cp $(DIST_DIR)/armstub-new.bin $(BOOTMNT)/
 	sync
 
-.PHONY: armstub all clean clean-all eject
+.PHONY: all armstub clean clean-all eject
