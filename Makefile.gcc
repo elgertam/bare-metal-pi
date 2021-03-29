@@ -1,19 +1,21 @@
 RPI_VERSION ?= 4
 
-BOOTMNT ?= /Volumes/system-boot
+BOOTMNT ?= /mnt/dist
+ARMGNU ?= aarch64-linux-gnu
 
-LLVMPATH ?= /usr/local/opt/llvm/bin
-CLANGFLAGS = -DRPI_VERSION=$(RPI_VERSION) -Wall -O2 -ffreestanding -nostdlib \
-	         -Iinclude -mgeneral-regs-only --target=aarch64-elf
+COPS = -DRPI_VERSION=$(RPI_VERSION) -Wall -nostdlib -ffreestanding \
+	   -Iinclude -mgeneral-regs-only
+
+ASMOPS = -Iinclude
 
 BUILD_DIR = build
 SRC_DIR = src
 DIST_DIR = dist
 
-all: clean kernel8.img armstub
+all : clean kernel8.img armstub
 
-clean:
-	rm -rf $(BUILD_DIR) armstub/$(BUILD_DIR) *.elf *.o *.img > /dev/null 2> /dev/null || true
+clean :
+	rm -rf $(BUILD_DIR) armstub/$(BUILD_DIR) *.img
 
 clean-all: clean
 	rm -rf $(DIST_DIR)
@@ -23,15 +25,15 @@ eject :
 
 $(BUILD_DIR)/%_c.o: $(SRC_DIR)/%.c
 	mkdir -p $(@D)
-	$(LLVMPATH)/clang $(CLANGFLAGS) -c $< -o $@
+	$(ARMGNU)-gcc $(COPS) -MMD -c $< -o $@
 
 $(BUILD_DIR)/%_s.o: $(SRC_DIR)/%.S
 	mkdir -p $(@D)
-	$(LLVMPATH)/clang $(CLANGFLAGS) -c $< -o $@
+	$(ARMGNU)-gcc $(COPS) -MMD -c $< -o $@
 
 armstub/$(BUILD_DIR)/%_s.o: armstub/$(SRC_DIR)/%.S
 	mkdir -p $(@D)
-	$(LLVMPATH)/clang $(CLANGFLAGS) -c $< -o $@
+	$(ARMGNU)-gcc $(COPS) -MMD -c $< -o $@
 
 C_FILES = $(wildcard $(SRC_DIR)/*.c)
 ASM_FILES = $(wildcard $(SRC_DIR)/*.S)
@@ -52,21 +54,22 @@ kernel8.img: $(SRC_DIR)/linker.ld $(OBJ_FILES)
 	@echo "Building for RPI $(value RPI_VERSION)"
 	@echo "Deploy to $(value BOOTMNT)"
 	@echo ""
-	$(LLVMPATH)/ld.lld -m aarch64elf -nostdlib $(OBJ_FILES) -T $(SRC_DIR)/linker.ld -o $(BUILD_DIR)/kernel8.elf
-ifeq ($(RPI_VERSION), 4)
-	$(LLVMPATH)/llvm-objcopy -O binary $(BUILD_DIR)/kernel8.elf $(DIST_DIR)/kernel8-rpi4.img
-else
-	$(LLVMPATH)/llvm-objcopy -O binary $(BUILD_DIR)/kernel8.elf $(DIST_DIR)/kernel8.img
-endif
+	$(ARMGNU)-ld -T $(SRC_DIR)/linker.ld -o $(BUILD_DIR)/kernel8.elf $(OBJ_FILES)
+	$(ARMGNU)-objcopy $(BUILD_DIR)/kernel8.elf -O binary $(DIST_DIR)/kernel8.img
 	cp config.txt $(DIST_DIR)/
+	mkdir -p $(BOOTMNT)
+ifeq ($(RPI_VERSION), 4)
+	mv $(DIST_DIR)/kernel8.img $(DIST_DIR)/kernel8-rpi4.img
+endif
 	cp $(DIST_DIR)/* $(BOOTMNT)/
 	sync
 
 armstub: $(ARMSTUB_OBJ_FILES)
 	mkdir -p $(DIST_DIR)
-	$(LLVMPATH)/ld.lld --section-start=.text=0 -m aarch64elf -o armstub/$(BUILD_DIR)/armstub.elf $(ARMSTUB_OBJ_FILES)
-	$(LLVMPATH)/llvm-objcopy -O binary armstub/$(BUILD_DIR)/armstub.elf $(DIST_DIR)/armstub-new.bin
+	$(ARMGNU)-ld --section-start=.text=0 -o armstub/$(BUILD_DIR)/armstub.elf $(ARMSTUB_OBJ_FILES)
+	$(ARMGNU)-objcopy armstub/$(BUILD_DIR)/armstub.elf -O binary $(DIST_DIR)/armstub-new.bin
+	mkdir -p $(BOOTMNT)
 	cp $(DIST_DIR)/armstub-new.bin $(BOOTMNT)/
 	sync
 
-.PHONY: all armstub clean clean-all eject
+.PHONY: armstub all clean clean-all eject
