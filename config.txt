@@ -5,5 +5,7 @@ disable_commandline_tags=1
 
 armstub=armstub-new.bin
 
+core_freq_min=500
+
 [pi4]
 kernel=kernel8-rpi4.img

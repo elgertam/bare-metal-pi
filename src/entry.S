@@ -83,25 +83,25 @@ vectors:
     ventry error_invalid_el0_32
 
 sync_invalid_el1t:
-    handle_invalid_entry    SYNC_INVALID_EL1t
+    handle_invalid_entry    SYNC_INVALID_EL1T
 
 irq_invalid_el1t:
-    handle_invalid_entry    IRQ_INVALID_EL1t
+    handle_invalid_entry    IRQ_INVALID_EL1T
 
 fiq_invalid_el1t:
-    handle_invalid_entry    FIQ_INVALID_EL1t
+    handle_invalid_entry    FIQ_INVALID_EL1T
 
 error_invalid_el1t:
-    handle_invalid_entry    ERROR_INVALID_EL1t
+    handle_invalid_entry    ERROR_INVALID_EL1T
 
 sync_invalid_el1h:
-    handle_invalid_entry    SYNC_INVALID_EL1h
+    handle_invalid_entry    SYNC_INVALID_EL1H
 
 fiq_invalid_el1h:
-    handle_invalid_entry    FIQ_INVALID_EL1h
+    handle_invalid_entry    FIQ_INVALID_EL1H
 
 error_invalid_el1h:
-    handle_invalid_entry    ERROR_INVALID_EL1h
+    handle_invalid_entry    ERROR_INVALID_EL1H
 
 sync_invalid_el0_64:
     handle_invalid_entry    SYNC_INVALID_EL0_64

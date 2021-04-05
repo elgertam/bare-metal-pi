@@ -3,8 +3,10 @@
 #include "peripherals/aux.h"
 #include "mini_uart.h"
 
-#define TXD 14
-#define RXD 15
+enum GPIO_PINS {
+    TXD = 14,
+    RXD = 15
+};
 
 void uart_init() {
     gpio_pin_set_func(TXD, GFAlt5);
