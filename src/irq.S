@@ -9,7 +9,7 @@ irq_enable:
     msr daifclr, #2
     ret
 
-.globl disable_irq
-disable_irq:
+.globl irq_disable
+irq_disable:
     msr daifset, #2
     ret

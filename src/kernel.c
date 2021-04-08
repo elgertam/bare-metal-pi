@@ -1,9 +1,11 @@
 #include "common.h"
-#include "utils.h"
-#include "mini_uart.h"
 #include "printf.h"
-#include "irq.h"
+#include "utils.h"
 #include "timer.h"
+#include "irq.h"
+#include "sched.h"
+#include "fork.h"
+#include "mini_uart.h"
 
 void putc(void *p, char c) {
     if (c == '\n') {
@@ -13,15 +15,27 @@ void putc(void *p, char c) {
     uart_send(c);
 }
 
+void process(char *array){
+    while (1) {
+        for (int i = 0; i < 5; i++){
+            uart_send(array[i]);
+            delay(1000000);
+        }
+    }
+}
+
 void kernel_main() {
+
+// -------------------- Initialize machine --------
+
     uart_init();
     init_printf(0, putc);
     printf("\nRaspberry Pi Bare Metal OS Initializing...\n");
 
     irq_init_vectors();
+    timer_init();
     enable_interrupt_controller();
     irq_enable();
-    timer_init();
 
 #if RPI_VERSION == 3
     printf("\t Board: Raspberry Pi 3\n");
@@ -33,25 +47,22 @@ void kernel_main() {
 
     printf("\tException Level: %d\n", get_el());
 
-    printf("\n");
-    printf("Sleeping 200ms...\n");
-    timer_sleep(200);
+//  ------------------ Start OS -------------------
 
-    printf("Sleeping 200ms...\n");
-    timer_sleep(200);
+    int result;
 
-    printf("Sleeping 200ms...\n");
-    timer_sleep(200);
+    result = copy_process((u64)&process, (u64)"12345");
+    if (result != 0) {
+        printf("Error while starting process 1");
+    }
 
-    printf("Sleeping 2s...\n");
-    timer_sleep(2000);
-
-    printf("Sleeping 2s...\n");
-    timer_sleep(2000);
-
-    printf("\nDone\n");
+    result = copy_process((u64)&process, (u64)"abcde");
+    if (result != 0) {
+        printf("Error while starting process 2");
+    }
 
     while(1) {
+        schedule();
         // uart_send(uart_recv());
     }
 }
