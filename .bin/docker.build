@@ -1,8 +1,6 @@
 #!/bin/bash
 
-docker run --name build0 \
+docker run --rm --name build0 \
            --env RPI_VERSION="${RPI_VERSION:-4}" \
            -v "$(pwd)":/workspace \
            -v /Volumes/boot:/mnt/dist rpi-build $@ ;
-
-docker rm build0 ;
