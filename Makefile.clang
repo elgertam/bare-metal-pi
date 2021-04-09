@@ -27,6 +27,9 @@ deploy :
 eject :
 	diskutil unmount $(BOOTMNT)
 
+servedocs :
+	python -m http.server --directory docs &
+
 $(BUILD_DIR)/%_c.o: $(SRC_DIR)/%.c
 	mkdir -p $(@D)
 	$(LLVMPATH)/clang $(CLANGFLAGS) -c $< -o $@
@@ -70,4 +73,4 @@ armstub: $(ARMSTUB_OBJ_FILES)
 	$(LLVMPATH)/ld.lld --section-start=.text=0 -m aarch64elf -o armstub/$(BUILD_DIR)/armstub.elf $(ARMSTUB_OBJ_FILES)
 	$(LLVMPATH)/llvm-objcopy -O binary armstub/$(BUILD_DIR)/armstub.elf $(DIST_DIR)/armstub-new.bin
 
-.PHONY: all armstub clean clean-all deploy eject
+.PHONY: all armstub clean clean-all deploy eject servedocs
