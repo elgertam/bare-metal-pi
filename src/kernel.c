@@ -15,7 +15,16 @@ void putc(void *p, char c) {
     uart_send(c);
 }
 
-void process(char *array){
+void process1(char *array){
+    while (1) {
+        for (int i = 0; i < 5; i++){
+            uart_send(array[i]);
+            delay(100000);
+        }
+    }
+}
+
+void process2(char *array){
     while (1) {
         for (int i = 0; i < 5; i++){
             uart_send(array[i]);
@@ -23,6 +32,7 @@ void process(char *array){
         }
     }
 }
+
 
 void kernel_main() {
 
@@ -51,18 +61,17 @@ void kernel_main() {
 
     int result;
 
-    result = copy_process((u64)&process, (u64)"12345");
+    result = copy_process((u64)&process1, (u64)"12345");
     if (result != 0) {
         printf("Error while starting process 1");
     }
 
-    result = copy_process((u64)&process, (u64)"abcde");
+    result = copy_process((u64)&process2, (u64)"abcde");
     if (result != 0) {
         printf("Error while starting process 2");
     }
 
     while(1) {
         schedule();
-        // uart_send(uart_recv());
     }
 }

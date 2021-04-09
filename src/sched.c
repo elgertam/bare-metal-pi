@@ -1,6 +1,6 @@
+#include "common.h"
 #include "sched.h"
 #include "irq.h"
-#include "printf.h"
 
 static struct task_struct init_task = INIT_TASK;
 
@@ -20,13 +20,15 @@ void preempt_enable(void){
 void _schedule(void) {
     preempt_disable();
 
-    int next, c;
+    int next;
+    i64 c;
     struct task_struct *p;
 
     while (1) {
         c = -1;
         next = 0;
 
+        // Find the task in TASK_RUNNING state w/ the maximum counter value
         for (int i = 0; i < NUM_TASKS; i++) {
             p = task[i];
             if (p && p->state == TASK_RUNNING && p->counter > c) {
@@ -38,6 +40,7 @@ void _schedule(void) {
             break;
         }
 
+        // If no tasks are running, halve all of the counters and increment by priority
         for (int i = 0; i < NUM_TASKS; i ++) {
             p = task[i];
             if (p){
@@ -75,15 +78,13 @@ void schedule_tail(void){
 void timer_tick() {
     --current->counter;
 
-    printf("\n\tIn timer_tick\tcurrent->counter: %d\tcurrent->preempt_count: %d\n", current->counter, current->preempt_count);
-
-    if (current->counter <= 0 && current->preempt_count <= 0) {
-        printf("timer_tick\tif\n");
-        current->counter = 0;
-
-        irq_enable();
-        _schedule();
-        irq_disable();
-
+    if (current->counter > 0 || current->preempt_count > 0) {
+        return;
     }
+
+    current->counter = 0;
+
+    irq_enable();
+    _schedule();
+    irq_disable();
 }

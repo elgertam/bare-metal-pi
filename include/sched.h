@@ -13,11 +13,9 @@
 #define FIRST_TASK          task[0]
 #define LAST_TASK           task[NUM_TASKS-1]
 
-// enum TaskState {
-//     TASK_RUNNING = (u64)0
-// };
-
-#define TASK_RUNNING        0
+enum TaskState {
+    TASK_RUNNING = 0
+};
 
 extern struct task_struct *current;
 extern struct task_struct *task[NUM_TASKS];
@@ -41,11 +39,10 @@ struct cpu_context {
 
 struct task_struct {
     struct cpu_context cpu_context;
-    //enum TaskState state;
-    long state;
-    long counter;
-    long priority;
-    long preempt_count;
+    enum TaskState state;
+    i64 counter;
+    i64 priority;
+    i64 preempt_count;
 };
 
 extern void sched_init(void);
@@ -56,11 +53,7 @@ extern void preempt_enable(void);
 extern void switch_to(struct task_struct* next);
 extern void cpu_switch_to(struct task_struct* prev, struct task_struct* next);
 
-// #define INIT_TASK {
-/* cpu_context   x19 20 21 22 23 24 25 26 27 28 fp sp pc */
-/* state etc */
-
-/*    cpu_context  {x19 20 21 22 23 24 25 26 27 28 fp sp pc} state         c  p  pec*/
+/*    cpu_context   x19 20 21 22 23 24 25 26 27 28 fp sp pc  state         c  p  pec*/
 #define INIT_TASK { {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, TASK_RUNNING, 0, 1, 0 }
 
 #endif

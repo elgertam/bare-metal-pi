@@ -1,10 +1,10 @@
 RPI_VERSION ?= 4
 
-BOOTMNT ?= /Volumes/system-boot
+BOOTMNT ?= /Volumes/boot
 
 LLVMPATH ?= /usr/local/opt/llvm/bin
 CLANGFLAGS = -DRPI_VERSION=$(RPI_VERSION) -Wall -O2 -ffreestanding -nostdlib \
-	         -Iinclude -mgeneral-regs-only --target=aarch64-elf
+	         -Iinclude -mgeneral-regs-only --target=aarch64-elf -MMD
 
 BUILD_DIR = build
 SRC_DIR = src
@@ -19,11 +19,13 @@ clean-all: clean
 	rm -rf $(DIST_DIR)
 
 deploy :
+	@echo "Deploy to $(value BOOTMNT)"
+	@echo ""
 	cp $(DIST_DIR)/* $(BOOTMNT)/
 	sync
 
 eject :
-	diskutil unmount /Volumes/system-boot
+	diskutil unmount $(BOOTMNT)
 
 $(BUILD_DIR)/%_c.o: $(SRC_DIR)/%.c
 	mkdir -p $(@D)
@@ -48,7 +50,6 @@ DEP_FILES = $(OBJ_FILES:%.o=%.d)
 kernel8.img: $(OBJ_FILES)
 	mkdir -p $(DIST_DIR)
 	@echo "Building for RPI $(value RPI_VERSION)"
-	@echo "Deploy to $(value BOOTMNT)"
 	@echo ""
 	$(LLVMPATH)/ld.lld -m aarch64elf -nostdlib $(OBJ_FILES) -T $(SRC_DIR)/linker.ld -o $(BUILD_DIR)/kernel8.elf
 ifeq ($(RPI_VERSION), 4)

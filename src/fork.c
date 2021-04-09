@@ -1,7 +1,6 @@
 #include "mm.h"
 #include "sched.h"
 #include "entry.h"
-#include "printf.h"
 
 int copy_process(u64 fn, u64 arg) {
     preempt_disable();
@@ -14,8 +13,6 @@ int copy_process(u64 fn, u64 arg) {
     if (!p) {
         return 1;
     }
-
-    printf("\n\tIn copy_process:\tcurrent->priority: %d\n", current->priority);
 
     p->priority = current->priority;
 

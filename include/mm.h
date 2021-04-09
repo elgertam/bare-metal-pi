@@ -12,7 +12,7 @@
 #define LOW_MEMORY      (2 * SECTION_SIZE)
 
 #if RPI_VERSION == 4
-#define HIGH_MEMORY     0x3F000000
+#define HIGH_MEMORY     0x20000000
 #else
 #define HIGH_MEMORY     PBASE
 #endif
