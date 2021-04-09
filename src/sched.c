@@ -1,6 +1,7 @@
 #include "common.h"
 #include "sched.h"
 #include "irq.h"
+#include "debug.h"
 
 static struct task_struct init_task = INIT_TASK;
 
@@ -54,6 +55,31 @@ void _schedule(void) {
 }
 
 void schedule(void) {
+
+    // printf("\n");
+    // DEBUG("\t0x%X", &(init_task));
+    // DEBUG("\t0x%X", &current);
+    // DEBUG("\t0x%X", current);
+    // printf("\n");
+    // DEBUG("0x%x", current->cpu_context.x19);
+    // DEBUG("0x%x", current->cpu_context.x20);
+    // DEBUG("0x%x", current->cpu_context.x21);
+    // DEBUG("0x%x", current->cpu_context.x22);
+    // DEBUG("0x%x", current->cpu_context.x23);
+    // DEBUG("0x%x", current->cpu_context.x24);
+    // DEBUG("0x%x", current->cpu_context.x25);
+    // DEBUG("0x%x", current->cpu_context.x26);
+    // DEBUG("0x%x", current->cpu_context.x27);
+    // DEBUG("0x%x", current->cpu_context.x28);
+    // DEBUG("0x%x", current->cpu_context.fp);
+    // DEBUG("0x%x", current->cpu_context.sp);
+    // DEBUG("0x%x", current->cpu_context.pc);
+    // printf("\n");
+    // DEBUG("0x%X", current->state);
+    // DEBUG("0x%X", current->counter);
+    // DEBUG("0x%X", current->priority);
+    // DEBUG("0x%X", current->preempt_count);
+
     current->counter = 0;
     _schedule();
 }
