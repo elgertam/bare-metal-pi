@@ -30,7 +30,7 @@ enum PageStatus {
 };
 
 u64 get_free_page();
-void memzero(u64 src, u64 n);
 void free_page(u64 p);
+void memzero(u64 src, u64 n);
 
 #endif

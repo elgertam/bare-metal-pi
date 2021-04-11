@@ -1,12 +1,12 @@
 #include "utils.h"
 #include "printf.h"
+#include "timer.h"
 #include "entry.h"
 #include "peripherals/irq.h"
 #include "peripherals/aux.h"
 #include "mini_uart.h"
-#include "timer.h"
 
-const char entry_error_messages[16][32] = {
+const char *entry_error_messages[] = {
     "SYNC_INVALID_EL1t",
     "IRQ_INVALID_EL1t",
     "FIQ_INVALID_EL1t",
@@ -25,13 +25,11 @@ const char entry_error_messages[16][32] = {
     "SYNC_INVALID_EL0_32",
     "IRQ_INVALID_EL0_32",
     "FIQ_INVALID_EL0_32",
-    "ERROR_INVALID_EL0_32"
-};
+    "ERROR_INVALID_EL0_32",
 
-void show_invalid_entry_message (u32 type, u64 esr, u64 address){
-    printf("ERROR CAUGHT: %s - %d, ESR: %X, Address: %X\n",
-           entry_error_messages[type], type, esr, address);
-}
+    "SYNC_ERROR",
+    "SYSCALL_ERROR"
+};
 
 void enable_interrupt_controller() {
     u64 handled_interrupts = AUX_IRQ | SYS_TIMER_IRQ_1 | SYS_TIMER_IRQ_3;
@@ -45,6 +43,11 @@ void enable_interrupt_controller() {
     #endif
 }
 
+void show_invalid_entry_message (u32 type, u64 esr, u64 address){
+    printf("ERROR CAUGHT: %s - %d, ESR: 0x%X, Address: 0x%X, EL: %d\n",
+           entry_error_messages[type], type, esr, address, get_el());
+}
+
 void handle_irq(){
     u32 irq;
     #if RPI_VERSION == 3
@@ -56,6 +59,8 @@ void handle_irq(){
     #endif
 
     while (irq) {
+        // we're going to use cont here because continue kind of sucks
+        u8 cont = 0;
         if (irq & AUX_IRQ) {
             irq &= ~AUX_IRQ;
 
@@ -64,16 +69,23 @@ void handle_irq(){
                 uart_send(uart_recv());
                 printf("\n");
             }
+            cont = 1 << 0;
         }
         if (irq & SYS_TIMER_IRQ_1) {
             irq &= ~SYS_TIMER_IRQ_1;
 
             handle_timer_1();
+            cont = 1 << 1;
         }
         if (irq & SYS_TIMER_IRQ_3) {
             irq &= ~SYS_TIMER_IRQ_3;
 
             handle_timer_3();
+            cont = 1 << 2;
+        }
+        if (!cont){
+            // default:
+            printf("Unknown pending IRQ: 0x%x\n", irq);
         }
     }
 }

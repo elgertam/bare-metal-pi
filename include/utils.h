@@ -2,7 +2,7 @@
 
 #include "common.h"
 
-void delay(u64 ticks);
-void put32(u64 address, u32 value);
-u32 get32(u64 address);
-u32 get_el();
+extern void delay(u64 ticks);
+extern void put32(u64 address, u32 value);
+extern u32 get32(u64 address);
+extern u32 get_el(void);

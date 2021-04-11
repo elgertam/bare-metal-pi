@@ -1,7 +1,7 @@
 #pragma once
 
-void irq_init_vectors();
-void irq_enable();
-void irq_disable();
+void enable_interrupt_controller(void);
 
-void enable_interrupt_controller();
+void irq_init_vectors(void);
+void irq_enable(void);
+void irq_disable(void);

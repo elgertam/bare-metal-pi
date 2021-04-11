@@ -1,13 +1,17 @@
 #include "common.h"
 #include "sched.h"
 #include "irq.h"
+#include "debug.h"
+#include "fork.h"
+#include "utils.h"
+#include "mm.h"
 
 static struct task_struct init_task = INIT_TASK;
 
 struct task_struct *current = &(init_task);
 struct task_struct *task[NUM_TASKS] = {&(init_task), };
 
-int num_tasks = 1;
+i32 num_tasks = 1;
 
 void preempt_disable(void){
     current->preempt_count++;
@@ -20,8 +24,7 @@ void preempt_enable(void){
 void _schedule(void) {
     preempt_disable();
 
-    int next;
-    i64 c;
+    i32 next, c;
     struct task_struct *p;
 
     while (1) {
@@ -41,14 +44,14 @@ void _schedule(void) {
         }
 
         // If no tasks are running, halve all of the counters and increment by priority
-        for (int i = 0; i < NUM_TASKS; i ++) {
+        for (int i = 0; i < NUM_TASKS; i++) {
             p = task[i];
             if (p){
                 p->counter = (p->counter >> 1) + p->priority;  // NOTE: x >> 1 is a halving operation
             }
         }
     }
-    switch_to(task[next]);
+    switch_to(task[next], next);
 
     preempt_enable();
 }
@@ -58,14 +61,15 @@ void schedule(void) {
     _schedule();
 }
 
-void switch_to(struct task_struct * next) {
-    struct task_struct *prev;
+void switch_to(struct task_struct * next, u32 index) {
+
+    // TODO: Try moving prev decl here
 
     if (current == next) {
         return;
     }
 
-    prev = current;
+    struct task_struct *prev = current;
     current = next;
 
     cpu_switch_to(prev, next);
@@ -87,4 +91,21 @@ void timer_tick() {
     irq_enable();
     _schedule();
     irq_disable();
+}
+
+void exit_process() {
+    preempt_disable();
+
+    for (int i = 0; i < NUM_TASKS; i++) {
+        if (task[i] == current) {
+            task[i]->state = TASK_ZOMBIE;
+            break;
+        }
+    }
+    if (current->stack) {
+        free_page(current->stack);
+    }
+
+    preempt_enable();
+    schedule();
 }

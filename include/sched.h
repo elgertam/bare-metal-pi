@@ -14,12 +14,15 @@
 #define LAST_TASK           task[NUM_TASKS-1]
 
 enum TaskState {
-    TASK_RUNNING = 0
+    TASK_RUNNING = 0,
+    TASK_ZOMBIE = 1
 };
+
+#define PF_KTHREAD          0x00000002
 
 extern struct task_struct *current;
 extern struct task_struct *task[NUM_TASKS];
-extern int num_tasks;
+extern i32 num_tasks;
 
 struct cpu_context {
     u64 x19;
@@ -43,6 +46,8 @@ struct task_struct {
     i64 counter;
     i64 priority;
     i64 preempt_count;
+    u64 stack;
+    u64 flags;
 };
 
 extern void sched_init(void);
@@ -50,10 +55,11 @@ extern void schedule(void);
 extern void timer_tick(void);
 extern void preempt_disable(void);
 extern void preempt_enable(void);
-extern void switch_to(struct task_struct* next);
+extern void switch_to(struct task_struct* next, u32 index);
 extern void cpu_switch_to(struct task_struct* prev, struct task_struct* next);
+extern void exit_process(void);
 
-/*    cpu_context   x19 20 21 22 23 24 25 26 27 28 fp sp pc  state         c  p  pec*/
-#define INIT_TASK { {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, TASK_RUNNING, 0, 1, 0 }
+/*      cpu_context=x19 20 21 22 23 24 25 26 27 28 fp sp pc  state         c  p  prec stk  flags      */
+#define INIT_TASK { {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, TASK_RUNNING, 0, 1, 0,   0,   PF_KTHREAD }
 
 #endif
