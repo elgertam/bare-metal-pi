@@ -1,9 +1,9 @@
 RPI_VERSION ?= 4
 
 BOOTMNT ?= /Volumes/boot
-
 LLVMPATH ?= /usr/local/opt/llvm/bin
-CLANGFLAGS = -DRPI_VERSION=$(RPI_VERSION) -Wall -O2 -ffreestanding -nostdlib \
+
+CLANGFLAGS = -DRPI_VERSION=$(RPI_VERSION) -Wall -nostdlib -ffreestanding \
 	         -Iinclude -mgeneral-regs-only --target=aarch64-elf -MMD
 
 BUILD_DIR = build
@@ -50,15 +50,15 @@ OBJ_FILES += $(ASM_FILES:$(SRC_DIR)/%.S=$(BUILD_DIR)/%_s.o)
 DEP_FILES = $(OBJ_FILES:%.o=%.d)
 -include $(DEP_FILES)
 
-kernel8.img: $(OBJ_FILES)
+kernel8.img: $(SRC_DIR)/linker.ld $(OBJ_FILES)
 	mkdir -p $(DIST_DIR)
 	@echo "Building for RPI $(value RPI_VERSION)"
 	@echo ""
-	$(LLVMPATH)/ld.lld -m aarch64elf -nostdlib $(OBJ_FILES) -T $(SRC_DIR)/linker.ld -o $(BUILD_DIR)/kernel8.elf
+	$(LLVMPATH)/ld.lld -m aarch64elf -T $(SRC_DIR)/linker.ld -o $(BUILD_DIR)/kernel8.elf $(OBJ_FILES)
 ifeq ($(RPI_VERSION), 4)
-	$(LLVMPATH)/llvm-objcopy -O binary $(BUILD_DIR)/kernel8.elf $(DIST_DIR)/kernel8-rpi4.img
+	$(LLVMPATH)/llvm-objcopy $(BUILD_DIR)/kernel8.elf -O binary $(DIST_DIR)/kernel8-rpi4.img
 else
-	$(LLVMPATH)/llvm-objcopy -O binary $(BUILD_DIR)/kernel8.elf $(DIST_DIR)/kernel8.img
+	$(LLVMPATH)/llvm-objcopy $(BUILD_DIR)/kernel8.elf -O binary $(DIST_DIR)/kernel8.img
 endif
 	cp config.txt $(DIST_DIR)/
 
@@ -70,7 +70,7 @@ ARMSTUB_DEP_FILES = $(ARMSTUB_OBJ_FILES:%.o=%.d)
 
 armstub: $(ARMSTUB_OBJ_FILES)
 	mkdir -p $(DIST_DIR)
-	$(LLVMPATH)/ld.lld --section-start=.text=0 -m aarch64elf -o armstub/$(BUILD_DIR)/armstub.elf $(ARMSTUB_OBJ_FILES)
-	$(LLVMPATH)/llvm-objcopy -O binary armstub/$(BUILD_DIR)/armstub.elf $(DIST_DIR)/armstub-new.bin
+	$(LLVMPATH)/ld.lld -m aarch64elf --section-start=.text=0 -o armstub/$(BUILD_DIR)/armstub.elf $(ARMSTUB_OBJ_FILES)
+	$(LLVMPATH)/llvm-objcopy armstub/$(BUILD_DIR)/armstub.elf -O binary $(DIST_DIR)/armstub-new.bin
 
 .PHONY: all armstub clean clean-all deploy eject servedocs

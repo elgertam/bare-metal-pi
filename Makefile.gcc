@@ -4,7 +4,7 @@ BOOTMNT ?= /mnt/dist
 ARMGNU ?= aarch64-linux-gnu
 
 COPS = -DRPI_VERSION=$(RPI_VERSION) -Wall -nostdlib -ffreestanding \
-	   -Iinclude -mgeneral-regs-only
+	   -Iinclude -mgeneral-regs-only -MMD
 
 ASMOPS = -Iinclude
 
@@ -12,10 +12,10 @@ BUILD_DIR = build
 SRC_DIR = src
 DIST_DIR = dist
 
-all : clean kernel8.img armstub
+all : kernel8.img armstub
 
 clean :
-	rm -rf $(BUILD_DIR) armstub/$(BUILD_DIR) *.img
+	rm -rf $(BUILD_DIR) armstub/$(BUILD_DIR) *.elf *.o *.img > /dev/null 2> /dev/null || true
 
 clean-all: clean
 	rm -rf $(DIST_DIR)
@@ -29,17 +29,20 @@ deploy:
 eject :
 	diskutil unmount /Volumes/boot
 
+servedocs :
+	python -m http.server --directory docs &
+
 $(BUILD_DIR)/%_c.o: $(SRC_DIR)/%.c
 	mkdir -p $(@D)
-	$(ARMGNU)-gcc $(COPS) -MMD -c $< -o $@
+	$(ARMGNU)-gcc $(COPS) -c $< -o $@
 
 $(BUILD_DIR)/%_s.o: $(SRC_DIR)/%.S
 	mkdir -p $(@D)
-	$(ARMGNU)-gcc $(COPS) -MMD -c $< -o $@
+	$(ARMGNU)-gcc $(COPS) -c $< -o $@
 
 armstub/$(BUILD_DIR)/%_s.o: armstub/$(SRC_DIR)/%.S
 	mkdir -p $(@D)
-	$(ARMGNU)-gcc $(COPS) -MMD -c $< -o $@
+	$(ARMGNU)-gcc $(COPS) -c $< -o $@
 
 C_FILES = $(wildcard $(SRC_DIR)/*.c)
 ASM_FILES = $(wildcard $(SRC_DIR)/*.S)
@@ -72,4 +75,4 @@ armstub: $(ARMSTUB_OBJ_FILES)
 	$(ARMGNU)-ld --section-start=.text=0 -o armstub/$(BUILD_DIR)/armstub.elf $(ARMSTUB_OBJ_FILES)
 	$(ARMGNU)-objcopy armstub/$(BUILD_DIR)/armstub.elf -O binary $(DIST_DIR)/armstub-new.bin
 
-.PHONY: all armstub clean clean-all eject
+.PHONY: all armstub clean clean-all deploy eject servedocs
