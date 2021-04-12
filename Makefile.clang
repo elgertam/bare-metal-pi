@@ -3,8 +3,9 @@ RPI_VERSION ?= 4
 BOOTMNT ?= /Volumes/boot
 LLVMPATH ?= /usr/local/opt/llvm/bin
 
-CLANGFLAGS = -DRPI_VERSION=$(RPI_VERSION) -Wall -nostdlib -ffreestanding \
-	         -Iinclude -mgeneral-regs-only --target=aarch64-elf -MMD
+CLANGFLAGS = -DRPI_VERSION=$(RPI_VERSION) -O3 -Wall -nostdlib -ffreestanding \
+	         -Iinclude -mgeneral-regs-only -mno-unaligned-access \
+	         --target=aarch64-elf -MMD
 
 BUILD_DIR = build
 SRC_DIR = src
