@@ -26,6 +26,8 @@
 #define SYNC_ERROR              16
 #define SYSCALL_ERROR           17
 
+#define DEBUG_STATEMENT         18
+
 #ifndef __ASSEMBLER__
 
 void ret_from_fork(void);

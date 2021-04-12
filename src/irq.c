@@ -28,7 +28,9 @@ const char *entry_error_messages[] = {
     "ERROR_INVALID_EL0_32",
 
     "SYNC_ERROR",
-    "SYSCALL_ERROR"
+    "SYSCALL_ERROR",
+
+    "DEBUG_STATEMENT"
 };
 
 void enable_interrupt_controller() {
@@ -43,9 +45,9 @@ void enable_interrupt_controller() {
     #endif
 }
 
-void show_invalid_entry_message (u32 type, u64 esr, u64 address){
-    printf("ERROR CAUGHT: %s - %d, ESR: 0x%X, Address: 0x%X, EL: %d\n",
-           entry_error_messages[type], type, esr, address, get_el());
+void show_invalid_entry_message (u32 type, u64 esr, u64 address, u64 spsr, u64 el){
+    printf("ERROR CAUGHT: %s - %d, ESR: 0x%X, Address: 0x%X, SPSR: 0x%x, EL: %d\n",
+           entry_error_messages[type], type, esr, address, spsr, el);
 }
 
 void handle_irq(){

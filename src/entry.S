@@ -2,13 +2,20 @@
 #include "entry.h"
 #include "sys.h"
 
-.macro handle_invalid_entry el, type
-    kernel_entry \el
+// This is for after we've already entered the kernel
+.macro handle_error el, type
     mov     x0,  #\type
     mrs     x1,  esr_el1
     mrs     x2,  elr_el1
+    mrs     x3,  spsr_el1
+    mov     x4,  #\el
     bl      show_invalid_entry_message
     b       err_hang
+.endm
+
+.macro handle_invalid_entry el, type
+    kernel_entry \el
+    handle_error \el, \type
 .endm
 
 .macro	ventry	label
@@ -16,7 +23,7 @@
     b       \label
 .endm
 
-.macro	kernel_entry, el
+.macro	kernel_entry el
     sub     sp,  sp,  #S_FRAME_SIZE
     stp     x0,  x1,  [sp, #16 * 0]
     stp     x2,  x3,  [sp, #16 * 1]
@@ -47,7 +54,7 @@
     stp     x22, x23, [sp, #16 * 16]
 .endm
 
-.macro	kernel_exit, el
+.macro	kernel_exit el
     ldp     x22, x23, [sp, #16 * 16]
     ldp     x30, x21, [sp, #16 * 15]
 
@@ -158,7 +165,7 @@ handle_el0_sync:
     lsr     x24, x25, #ESR_ELx_EC_SHIFT     // exception class
     cmp     x24, #ESR_ELx_EC_SVC64          // SVC in 64-bit state
     b.eq    el0_svc
-    handle_invalid_entry 0, SYNC_ERROR
+    handle_error 0, SYNC_ERROR
 
 sc_nr .req  x25                             // number of system calls
 scno  .req  x26                             // syscall number
@@ -176,7 +183,7 @@ el0_svc:
     blr     x16                             // call sys_* routine
     b       ret_from_syscall
 ni_sys:
-    handle_invalid_entry 0, SYSCALL_ERROR
+    handle_error 0, SYSCALL_ERROR
 ret_from_syscall:
     bl      irq_disable
     str     x0, [sp, #S_X0]                 // returned x0
