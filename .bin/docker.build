@@ -1,6 +1,16 @@
 #!/bin/bash
 
-docker run --rm --name build0 \
+do_build () {
+    RPI_VERSION=$1;
+    shift
+    docker run --rm --name build0 \
            --env RPI_VERSION="${RPI_VERSION:-4}" \
            -v "$(pwd)":/workspace \
-           -v /Volumes/boot:/mnt/dist rpi-build $@ ;
+           -v /Volumes/boot:/mnt/dist rpi-build make -f Makefile.gcc $@ ;
+}
+
+make clean-all
+do_build 3
+make clean
+do_build 4
+make clean

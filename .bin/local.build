@@ -3,6 +3,6 @@ set -x
 
 make clean-all
 make clean
-RPI_VERSION=3 make
+RPI_VERSION=3 make -f Makefile.clang
 make clean
-RPI_VERSION=4 make
+RPI_VERSION=4 make -f Makefile.clang

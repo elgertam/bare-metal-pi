@@ -1,1 +1,1 @@
-Makefile.clang
+Makefile.gcc

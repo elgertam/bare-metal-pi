@@ -1,4 +1,4 @@
 #!/bin/sh
 
 runbuild
-make deploy
+make -f Makefile.clang deploy

@@ -20,6 +20,12 @@ clean :
 clean-all: clean
 	rm -rf $(DIST_DIR)
 
+deploy:
+	@echo "Deploy to $(value BOOTMNT)"
+	@echo ""
+	cp $(DIST_DIR)/* $(BOOTMNT)/
+	sync
+
 eject :
 	diskutil unmount /Volumes/boot
 
@@ -46,17 +52,14 @@ DEP_FILES = $(OBJ_FILES:%.o=%.d)
 kernel8.img: $(SRC_DIR)/linker.ld $(OBJ_FILES)
 	mkdir -p $(DIST_DIR)
 	@echo "Building for RPI $(value RPI_VERSION)"
-	@echo "Deploy to $(value BOOTMNT)"
 	@echo ""
 	$(ARMGNU)-ld -T $(SRC_DIR)/linker.ld -o $(BUILD_DIR)/kernel8.elf $(OBJ_FILES)
-	$(ARMGNU)-objcopy $(BUILD_DIR)/kernel8.elf -O binary $(DIST_DIR)/kernel8.img
-	cp config.txt $(DIST_DIR)/
-	mkdir -p $(BOOTMNT)
 ifeq ($(RPI_VERSION), 4)
-	mv $(DIST_DIR)/kernel8.img $(DIST_DIR)/kernel8-rpi4.img
+	$(ARMGNU)-objcopy $(BUILD_DIR)/kernel8.elf -O binary $(DIST_DIR)/kernel8-rpi4.img
+else
+	$(ARMGNU)-objcopy $(BUILD_DIR)/kernel8.elf -O binary $(DIST_DIR)/kernel8.img
 endif
-	cp $(DIST_DIR)/* $(BOOTMNT)/
-	sync
+	cp config.txt $(DIST_DIR)/
 
 ARMSTUB_FILES = $(wildcard armstub/$(SRC_DIR)/*.S)
 ARMSTUB_OBJ_FILES = $(ARMSTUB_FILES:armstub/$(SRC_DIR)/%.S=armstub/$(BUILD_DIR)/%_s.o)
@@ -68,8 +71,5 @@ armstub: $(ARMSTUB_OBJ_FILES)
 	mkdir -p $(DIST_DIR)
 	$(ARMGNU)-ld --section-start=.text=0 -o armstub/$(BUILD_DIR)/armstub.elf $(ARMSTUB_OBJ_FILES)
 	$(ARMGNU)-objcopy armstub/$(BUILD_DIR)/armstub.elf -O binary $(DIST_DIR)/armstub-new.bin
-	mkdir -p $(BOOTMNT)
-	cp $(DIST_DIR)/armstub-new.bin $(BOOTMNT)/
-	sync
 
 .PHONY: all armstub clean clean-all eject
