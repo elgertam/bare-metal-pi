@@ -48,7 +48,7 @@ void user_process1(char *array)
 }
 
 void user_process(){
-    char buf[30] = {0};
+    char buf[32] = {0};
     tfp_sprintf(buf, "User process started\n\r");
     call_sys_write(buf);
     unsigned long stack = call_sys_malloc();
@@ -75,7 +75,7 @@ void user_process(){
 }
 
 void kernel_process(){
-    printf("Kernel process started. EL %d\r\n", get_el());
+    printf("Kernel process started.\r\n");
     i32 err = move_to_user_mode((u64)&user_process);
     if (err < 0){
         printf("Error while moving process to user mode\n\r");
