@@ -1,3 +1,5 @@
+#pragma once
+
 #include "printf.h"
 
 #define DEBUG(format, var) printf("\tDEBUG\t"    \
