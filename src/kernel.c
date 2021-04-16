@@ -96,13 +96,13 @@ void kernel_main() {
     irq_enable();
 
 #if RPI_VERSION == 3
-    printf("\t Board: Raspberry Pi 3\n");
+    printf("\tBoard: Raspberry Pi 3\n");
 #endif
 
 #if RPI_VERSION == 4
     printf("\tBoard: Raspberry Pi 4\n");
 #endif
-
+    printf("\tClock Frequency: %d MHz\n", get_freq());
     printf("\tException Level: %d\n", get_el());
 
 //  ------------------ Start OS -------------------

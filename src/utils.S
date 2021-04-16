@@ -4,6 +4,11 @@ get_el:
     lsr     x0, x0, #2
     ret
 
+.globl get_freq
+get_freq:
+    mrs     x0, CNTFRQ_EL0
+    ret
+
 .globl put32
 put32:
     str     w1, [x0]
