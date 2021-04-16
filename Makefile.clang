@@ -39,9 +39,11 @@ $(BUILD_DIR)/%_s.o: $(SRC_DIR)/%.S
 	mkdir -p $(@D)
 	$(LLVMPATH)/clang $(CLANGFLAGS) -c $< -o $@
 
+ARMSTUB_FLAGS = -DBCM2711=1 -DGIC=1
+
 armstub/$(BUILD_DIR)/%_s.o: armstub/$(SRC_DIR)/%.S
 	mkdir -p $(@D)
-	$(LLVMPATH)/clang $(CLANGFLAGS) -c $< -o $@
+	$(LLVMPATH)/clang $(ARMSTUB_FLAGS) $(CLANGFLAGS) -c $< -o $@
 
 C_FILES = $(wildcard $(SRC_DIR)/*.c)
 ASM_FILES = $(wildcard $(SRC_DIR)/*.S)
