@@ -1,6 +1,12 @@
 #include "arm/sysregs.h"
 #include "mm.h"
 
+#if RPI_VERSION == 4
+#define OSC_FREQ		54000000
+#else
+#define OSC_FREQ		19200000
+#endif
+
 .section ".text.boot"
 
 .globl _start
@@ -16,6 +22,9 @@ master:
 
     ldr     x0, =HCR_VALUE
     msr     hcr_el2, x0
+
+    ldr     x0, =OSC_FREQ
+    msr     CNTFRQ_EL0, x0
 
     ldr     x0, =SCR_VALUE
     msr     scr_el3, x0

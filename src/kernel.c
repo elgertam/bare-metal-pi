@@ -102,7 +102,6 @@ void kernel_main() {
 #if RPI_VERSION == 4
     printf("\tBoard: Raspberry Pi 4\n");
 #endif
-    printf("\tClock Frequency: %d MHz\n", get_freq());
     printf("\tException Level: %d\n", get_el());
 
 //  ------------------ Start OS -------------------
