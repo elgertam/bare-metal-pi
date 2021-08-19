@@ -6,6 +6,9 @@
 #include "sched.h"
 #include "fork.h"
 #include "mini_uart.h"
+#include "i2c.h"
+#include "spi.h"
+#include "mailbox.h"
 #include "sys.h"
 #include "debug.h"
 

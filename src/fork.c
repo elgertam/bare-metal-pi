@@ -1,4 +1,5 @@
 #include "mm.h"
+#include "mem.h"
 #include "sched.h"
 #include "debug.h"
 #include "fork.h"
@@ -18,8 +19,8 @@ i32 copy_process(u64 clone_flags, u64 fn, u64 arg, u64 stack) {
     }
 
     struct pt_regs *childregs = task_pt_regs(p);
-    memzero((u64)childregs, sizeof(struct pt_regs));
-    memzero((u64)&p->cpu_context, sizeof(struct cpu_context));
+    memzero((void*)childregs, sizeof(struct pt_regs));
+    memzero((void*)&p->cpu_context, sizeof(struct cpu_context));
 
     if (clone_flags & PF_KTHREAD) {
         p->cpu_context.x19 = fn;
@@ -51,7 +52,7 @@ i32 copy_process(u64 clone_flags, u64 fn, u64 arg, u64 stack) {
 
 i32 move_to_user_mode(u64 pc) {
     struct pt_regs *regs = task_pt_regs(current);
-    memzero((u64)regs, sizeof(*regs));
+    memzero((void *)regs, sizeof(*regs));
     regs->pc = pc;
     regs->pstate = PSR_MODE_EL0t;
 

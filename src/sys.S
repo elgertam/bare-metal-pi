@@ -19,7 +19,7 @@ call_sys_exit:
     ret
 
 //                         x0      x1       x2
-// void call_sys_clone(u64 fn, u64 arg, u64 stack);
+// i32 call_sys_clone(u64 fn, u64 arg, u64 stack);
 .globl call_sys_clone
 call_sys_clone:
     mov     x10, x0

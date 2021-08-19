@@ -3,7 +3,7 @@
 static enum PageStatus mem_map [ PAGING_PAGES ] = {FREE, };
 
 u64 get_free_page() {
-    for (int i = 0; i < PAGING_PAGES; i++) {
+    for (u64 i = 0; i < PAGING_PAGES; i++) {
         if (mem_map[i] == FREE) {
             mem_map[i] = ALLOCATED;
             return LOW_MEMORY + (i * PAGE_SIZE);
