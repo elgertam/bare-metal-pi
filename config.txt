@@ -10,5 +10,8 @@ enable_uart=0
 core_freq=250
 
 [pi4]
+dtoverlay=vc4-fkms-v3d
+gpu_mem=256
 kernel=kernel8-rpi4.img
 core_freq_min=500
+disable_l2cache=0

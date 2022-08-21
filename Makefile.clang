@@ -2,6 +2,7 @@ RPI_VERSION ?= 4
 
 BOOTMNT ?= /Volumes/boot
 LLVMPATH ?= /usr/local/opt/llvm/bin
+FIRMWARE_DIR ?= ../firmware
 
 CLANGFLAGS = -DRPI_VERSION=$(RPI_VERSION) -O3 -Wall -nostdlib -ffreestanding \
 	         -Iinclude -mgeneral-regs-only -mno-unaligned-access \
@@ -10,6 +11,7 @@ CLANGFLAGS = -DRPI_VERSION=$(RPI_VERSION) -O3 -Wall -nostdlib -ffreestanding \
 BUILD_DIR = build
 SRC_DIR = src
 DIST_DIR = dist
+PROVISION_DIR = provision
 
 all: kernel8.img armstub
 
@@ -27,6 +29,16 @@ deploy :
 
 eject :
 	diskutil unmount $(BOOTMNT)
+
+firmware :
+	cp -r $(FIRMWARE_DIR)/boot/* $(BOOTMNT)
+	sync
+
+provision:
+	@echo "Copy files to disk"
+	@echo ""
+	cp $(PROVISION_DIR)/* $(BOOTMNT)
+	sync
 
 servedocs :
 	nohup python -m http.server --directory docs &
@@ -74,4 +86,4 @@ armstub: $(ARMSTUB_OBJ_FILES)
 	$(LLVMPATH)/ld.lld -m aarch64elf --section-start=.text=0 -o armstub/$(BUILD_DIR)/armstub.elf $(ARMSTUB_OBJ_FILES)
 	$(LLVMPATH)/llvm-objcopy armstub/$(BUILD_DIR)/armstub.elf -O binary $(DIST_DIR)/armstub-new.bin
 
-.PHONY: all armstub clean clean-all deploy eject servedocs
+.PHONY: all armstub clean clean-all deploy eject firmware provision servedocs
