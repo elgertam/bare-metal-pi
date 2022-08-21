@@ -56,3 +56,9 @@ dkms.conf
 
 build/
 dist/
+docs
+.vscode-ctags
+GPATH
+GRTAGS
+GTAGS
+provision
