@@ -11,11 +11,12 @@
 
 #define LOW_MEMORY      (2 * SECTION_SIZE)
 
-#if RPI_VERSION == 4
-#define HIGH_MEMORY     0x20000000
-#else
-#define HIGH_MEMORY     PBASE
-#endif
+// #if RPI_VERSION == 4
+// #define HIGH_MEMORY     0x20000000
+// #else
+// #define HIGH_MEMORY     PBASE
+// #endif
+#define HIGH_MEMORY     0x30000000
 
 #define PAGING_MEMORY   (HIGH_MEMORY - LOW_MEMORY)
 #define PAGING_PAGES    (PAGING_MEMORY/PAGE_SIZE)

@@ -77,6 +77,103 @@ void user_process(){
     call_sys_exit();
 }
 
+#define PBASE           0xFE000000
+#define PM_BASE         (PBASE + 0x100000)
+#define PM_V3DRSTN      (1 << 6)
+#define PM_PASSWORD     0x5a000000
+#define PM_GRAFX        (PM_BASE + 0x10c)
+
+#define ASB_V3D_M_CTRL  0x0c
+#define ASB_V3D_S_CTRL  0x08
+
+#define ASB_REQ_STOP    (1 << 0)
+#define ASB_ACK         (1 << 1)
+#define ASB_EMPTY       (1 << 2)
+#define ASB_FULL        (1 << 3)
+
+void gpu_init(void){
+    reg32* pm;
+    reg32* asb_v3d_m_ctrl;
+    reg32* asb_v3d_s_ctrl;
+
+    // MMIO::write(MMIO::PM_GRAFX, MMIO::read(MMIO::PM_GRAFX) | PM_PASSWORD | PM_V3DRSTN);
+    pm = (reg32 *)PM_GRAFX;
+    *pm = (*pm) | PM_PASSWORD | PM_V3DRSTN;
+
+    // enable master AXI bridges
+    asb_v3d_m_ctrl = (reg32 *)ASB_V3D_M_CTRL;
+    *asb_v3d_m_ctrl = PM_PASSWORD | ((*asb_v3d_m_ctrl) & ~ASB_REQ_STOP);
+    // wait for acknowledgement
+    while ((*asb_v3d_m_ctrl) & ASB_ACK);
+
+    // enable slave AXI bridges
+    asb_v3d_s_ctrl = (reg32 *)ASB_V3D_S_CTRL;
+    *asb_v3d_s_ctrl = PM_PASSWORD | ((*asb_v3d_s_ctrl) & ~ASB_REQ_STOP);
+
+    // wait for acknowledgement
+    while ((*asb_v3d_s_ctrl) & ASB_ACK);
+}
+
+void gpu_info(){
+    u32 v3d_reg;
+    v3d_reg = (u32)*((reg32 *) 0xf1200008);
+    printf("Value V3D_HUB_IDENT0(0xf1200008) 0x%08x\n", v3d_reg);
+    v3d_reg = (u32)*((reg32 *) 0xfec00008);
+    printf("Value V3D_HUB_IDENT0(0xfec00008) 0x%08x\n", v3d_reg);
+    v3d_reg = (u32)*((reg32 *) 0x7ec00008);
+    printf("Value V3D_HUB_IDENT0(0x7ec00008) 0x%08x\n", v3d_reg);
+
+    printf("Initialize GPU\n");
+    gpu_init();
+    printf("Initialize GPU complete\n");
+
+    v3d_reg = (u32)*((reg32 *) 0xf1200008);
+    printf("Value V3D_HUB_IDENT0(0xf1200008) 0x%08x\n", v3d_reg);
+    v3d_reg = (u32)*((reg32 *) 0xfec00008);
+    printf("Value V3D_HUB_IDENT0(0xfec00008) 0x%08x\n", v3d_reg);
+    v3d_reg = (u32)*((reg32 *) 0x7ec00008);
+    printf("Value V3D_HUB_IDENT0(0x7ec00008) 0x%08x\n", v3d_reg);
+}
+
+void mailbox() {
+    printf("MAILBOX\n");
+
+    printf("EMMC CLOCK %d\n", mailbox_clock_rate(CT_EMMC));
+    printf("UART CLOCK %d\n", mailbox_clock_rate(CT_UART));
+    printf("ARM CLOCK %d\n", mailbox_clock_rate(CT_ARM));
+    printf("CORE CLOCK %d\n", mailbox_clock_rate(CT_CORE));
+    printf("V3D CLOCK %d\n", mailbox_clock_rate(CT_V3D));
+
+    printf("VPU POWER STATE: %d\n", mailbox_power_check(RPD_VPU1));
+    printf("V3D POWER STATE: %d\n", mailbox_power_check(RPD_V3D));
+
+
+    for (int i = RPD_I2C0; i < RPD_COUNT; i++) {
+        u32 on = 1;
+        mailbox_generic_command(RFT_SET_DOMAIN_STATE, i, &on);
+    }
+
+    u32 on = 1;
+    mailbox_generic_command(RFT_SET_ENABLE_QPU, 1, &on);
+    mailbox_generic_command(RFT_SET_ENABLE_QPU, 1, &on);
+
+    printf("V3D POWER STATE: %d\n", mailbox_power_check(RPD_V3D));
+
+    u32 max_temp = 0;
+    mailbox_generic_command(RFT_GET_MAX_TEMPERATURE, 0, &max_temp);
+
+    printf("MAX TEMP: %d\n", max_temp);
+
+    for (int i = 0; i < 1; i++) {
+        u32 cur_temp = 0;
+
+        mailbox_generic_command(RFT_GET_TEMPERATURE, 0, &cur_temp);
+
+        printf("CUR TEMP: %dC\n", cur_temp / 1000);
+        timer_sleep(1000);
+    }
+}
+
 void kernel_process(){
     printf("Kernel process started.\r\n");
     i32 err = move_to_user_mode((u64)&user_process);
@@ -106,6 +203,8 @@ void kernel_main() {
     printf("\tBoard: Raspberry Pi 4\n");
 #endif
     printf("\tException Level: %d\n", get_el());
+    mailbox();
+    gpu_info();
 
 //  ------------------ Start OS -------------------
 
