@@ -32,10 +32,21 @@ typedef struct {
 } mailbox_clock;
 
 typedef enum {
-    CT_EMMC =   1,
-    CT_UART =   2,
-    CT_ARM =    3,
-    CT_CORE =   4,
+    CT_EMMC =       1,
+    CT_UART =       2,
+    CT_ARM =        3,
+    CT_CORE =       4,
+    CT_V3D =        5,
+    CT_H264 =       6,
+    CT_ISP =        7,
+    CT_SDRAM =      8,
+    CT_PIXEL =      9,
+    CT_PWM =        10,
+    CT_HEVC =       11,
+    CT_EMMC2 =      12,
+    CT_M2MC =       13,
+    CT_PIXEL_BVB =  14,
+    CT_COUNT =      15,
 } clock_type;
 
 typedef enum {
