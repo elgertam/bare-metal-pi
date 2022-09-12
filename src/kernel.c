@@ -12,6 +12,7 @@
 #include "sys.h"
 #include "debug.h"
 #include "gpu.h"
+#include "video.h"
 
 void putc(void *p, char c) {
     if (c == '\n') {
@@ -167,6 +168,7 @@ void kernel_main() {
     printf("\tException Level: %d\n", get_el());
     mailbox();
     gpu_info();
+    video_set_resolution(1280, 800, 32);
 
 //  ------------------ Start OS -------------------
 

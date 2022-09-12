@@ -13,5 +13,7 @@ typedef int16_t i16;
 typedef int32_t i32;
 typedef int64_t i64;
 
+typedef volatile u8 reg8;
+typedef volatile u16 reg16;
 typedef volatile u32 reg32;
 typedef volatile u64 reg64;
