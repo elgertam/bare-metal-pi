@@ -1,5 +1,6 @@
 #include "common.h"
 #include "gpu.h"
+#include "timer.h"
 
 i16 gpu_init(void){
     reg32* pm;

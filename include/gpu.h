@@ -1,3 +1,5 @@
+#pragma once
+
 #include "peripherals/v3d.h"
 
 #define INIT_SUCCESS 0

@@ -4,11 +4,15 @@
 #include "mem.h"
 
 typedef struct {
-    reg32 read;
-    reg32 res[5];
+    reg32 read;     // Begin Mailbox 0
+    reg32 res0[3];
+    reg32 peek;
+    reg32 sender;
     reg32 status;
-    reg32 config;
-    reg32 write;
+    reg32 config;   // End Mailbox 0
+
+    reg32 write;    // Begin Mailbox 1
+    reg32 res1[7];  // End Mailbox 1
 } mailbox_regs;
 
 mailbox_regs *MBX() {
@@ -23,8 +27,10 @@ typedef struct {
 
 static u32 property_data[8192] __attribute__((aligned(16)));
 
-#define MAIL_EMPTY 0x40000000
-#define MAIL_FULL  0x80000000
+typedef enum {
+    MAIL_EMPTY = 0x40000000,
+    MAIL_FULL=   0x80000000
+} mail_status;
 
 typedef enum {
     MAIL_POWER =    0,
@@ -59,17 +65,16 @@ static u32 mailbox_read(u8 channel) {
     }
 }
 
-
 bool mailbox_process(mailbox_tag *tag, u32 tag_size) {
-    const u32 buffer_size = tag_size + 12;
+    const u32 buffer_size = tag_size + sizeof(mailbox_tag);
 
-    memcpy(&property_data[2], tag, tag_size);
+    memcpy(property_data + 2, tag, tag_size);
 
     property_buffer *buff = (property_buffer *)property_data;
     buff->size = buffer_size;
     buff->code = RFS_REQUEST;
 
-    property_data[(buffer_size / 4) - 1] = RFT_PROPERTY_END;
+    property_data[(buffer_size / sizeof(u32)) - 1] = RFT_PROPERTY_END;
 
     mailbox_write(MAIL_TAGS, (u32)(void*)property_data);
 

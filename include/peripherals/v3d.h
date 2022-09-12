@@ -1,3 +1,5 @@
+#pragma once
+
 #define PBASE           0xfe000000
 #define PM_BASE         (PBASE + 0x100000)
 #define PM_V3DRSTN      (1 << 6)
