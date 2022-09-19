@@ -167,8 +167,10 @@ void kernel_main() {
 #endif
     printf("\tException Level: %d\n", get_el());
     mailbox();
-    gpu_info();
+    video_set_dma(true);
+    video_init();
     video_set_resolution(1280, 800, 32);
+    gpu_info();
 
 //  ------------------ Start OS -------------------
 

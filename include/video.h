@@ -21,10 +21,15 @@ typedef enum {
   ALPHA = 0xff << ALPHA_SHIFT
 } color_channel;
 
+void video_init();
+
 void video_set_resolution(u32 x_res, u32 y_res, u32 bpp);
 void video_draw_pixel(u32 color, u32 x_pos, u32 y_pos);
 void video_draw_char(char c, u32 x_pos, u32 y_pos);
 void video_draw_string(char * s, u32 x_pos, u32 y_pos);
+
+void video_dma();
+void video_set_dma(bool b);
 
 u32 font_get_height();
 u32 font_get_width();
