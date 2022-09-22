@@ -64,7 +64,7 @@ typedef struct {
   dma4_channel_regs dma4_regs[4];
 } dma_channel_regs_all;
 
-#define REGS_DMA(channel) ((dma_channel_regs *)((PBASE + 0x7000) + (channel * 0x100)))
+#define REGS_DMA(channel) ((dma_channel_regs *)((u64)((PBASE + 0x7000) + (channel * 0x100))))
 
 #define REGS_DMA_INT_STATUS *((reg32 *)(PBASE + 0x7fe0))
 #define REGS_DMA_ENABLE *((reg32 *)(PBASE + 0x7ff0))

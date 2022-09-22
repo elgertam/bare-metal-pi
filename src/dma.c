@@ -71,8 +71,8 @@ void dma_setup_mem_copy(dma_channel *channel, void * dest, void * src, u32 lengt
                                 | DMA_TI_DEST_INC
                                 ;
 
-  channel->block->src_addr = (u32)src;
-  channel->block->dest_addr = (u32)dest;
+  channel->block->src_addr = SAFE_TRUNCATE(src);
+  channel->block->dest_addr = SAFE_TRUNCATE(dest);
   channel->block->xfer_length = length;
   channel->block->stride = 0;
   channel->block->next_block_addr = 0;
@@ -81,7 +81,7 @@ void dma_setup_mem_copy(dma_channel *channel, void * dest, void * src, u32 lengt
 void dma_start(dma_channel *channel) {
   dma_channel_regs * dcr = REGS_DMA(channel->channel);
 
-  dcr->control_block_addr = BUS_ADDRESS((u32)channel->block);
+  dcr->control_block_addr = BUS_ADDRESS(SAFE_TRUNCATE(channel->block));
   dcr->control = DMA_CS_WAIT_FOR_OUTSTANDING_WRITES
                | DMA_CS_PANIC_PRIORITY
                | (DMA_DEFAULT_PRIORITY << DMA_CS_PRIORITY_SHIFT)

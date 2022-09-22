@@ -1,3 +1,4 @@
+#include "common.h"
 #include "mailbox.h"
 #include "peripherals/base.h"
 #include "printf.h"
@@ -76,7 +77,7 @@ bool mailbox_process(mailbox_tag *tag, u32 tag_size) {
 
     property_data[(buffer_size / sizeof(u32)) - 1] = RFT_PROPERTY_END;
 
-    mailbox_write(MAIL_TAGS, (u32)(void*)property_data);
+    mailbox_write(MAIL_TAGS, SAFE_TRUNCATE(property_data));
 
     mailbox_read(MAIL_TAGS);
 

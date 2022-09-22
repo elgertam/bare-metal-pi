@@ -105,7 +105,7 @@ void do_dma(void * dest, void * src, u32 total) {
 }
 
 void video_dma() {
-  do_dma(FRAMEBUFFER, DMABUFFER, fb_req.buf.screen_size);
+  do_dma((void *)FRAMEBUFFER, (void *)DMABUFFER, fb_req.buf.screen_size);
 }
 
 typedef struct {
@@ -180,7 +180,7 @@ void video_set_resolution(u32 x_res, u32 y_res, u32 bpp) {
         buf[i] = bg32_buffer[i];
       }
     } else {
-      do_dma(BUS_ADDR(vid_buffer), (void *)bg32_buffer, fb_req.buf.screen_size);
+      do_dma((void *)BUS_ADDR(vid_buffer), (void *)bg32_buffer, fb_req.buf.screen_size);
     }
   } else if (fb_req.depth.bpp == 8) {
     if (!use_dma){
@@ -189,7 +189,7 @@ void video_set_resolution(u32 x_res, u32 y_res, u32 bpp) {
         buf[i] = bg8_buffer[i];
       }
     } else {
-      do_dma(BUS_ADDR(vid_buffer), (void *)bg8_buffer, fb_req.buf.screen_size);
+      do_dma((void *)BUS_ADDR(vid_buffer), (void *)bg8_buffer, fb_req.buf.screen_size);
     }
   } else {
     printf("Cannot handle %d bits per pixel.\n", fb_req.depth.bpp);
@@ -231,7 +231,7 @@ void video_set_resolution(u32 x_res, u32 y_res, u32 bpp) {
 }
 
 void video_draw_pixel(u32 color, u32 x, u32 y) {
-  reg8 * frame_buffer = (reg8 *)((fb_req.buf.base | 0x40000000) & ~0xC0000000);
+  // reg8 * frame_buffer = (reg8 *)((fb_req.buf.base | 0x40000000) & ~0xC0000000);
 
   u8 bpp = fb_req.depth.bpp;
   u8 span = bpp >> 3;
