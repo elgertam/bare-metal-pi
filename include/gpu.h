@@ -1,6 +1,6 @@
 #pragma once
 
-#include "peripherals/v3d.h"
+#include "peripherals/pm.h"
 
 #define INIT_SUCCESS 0
 #define AXI_M_INIT_FAIL -1

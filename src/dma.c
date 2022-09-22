@@ -41,12 +41,13 @@ dma_channel * dma_open_channel(u32 channel) {
 
   dma_channel * dma = (dma_channel *)&channels[_channel];
   dma->channel = _channel;
+
+  // Blocks in memory must be 32-byte aligned
   dma->block = (dma_control_block *)((LOW_MEMORY + 31) & ~31);
   dma->block->res0[0] = 0;
   dma->block->res0[1] = 0;
 
   dma_channel_regs * dcr = REGS_DMA(dma->channel);
-
 
   REGS_DMA_ENABLE |= (1 << dma->channel);
   timer_sleep(3);
