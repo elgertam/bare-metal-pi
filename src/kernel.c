@@ -14,6 +14,8 @@
 #include "gpu.h"
 #include "video.h"
 
+extern unsigned char * memset_code;
+
 void putc(void *p, char c) {
     if (c == '\n') {
         uart_send('\r');
@@ -80,11 +82,10 @@ void user_process(){
 }
 
 void gpu_info(){
-    u32 v3d_reg;
     i16 res = 0;
+    u32 ncores;
 
-    v3d_reg = (u32)*((reg32 *) 0xfec00008);
-    printf("Value V3D_HUB_IDENT0(0xfec00008) 0x%08x\n", v3d_reg);
+    PROBE(REGS_V3D_HUB_IDENT->ident[0]);
 
     printf("Initialize GPU\n");
     res = gpu_init();
@@ -94,8 +95,47 @@ void gpu_info(){
     }
     printf("Initialize GPU complete\n");
 
-    v3d_reg = (u32)*((reg32 *) 0xfec00008);
-    printf("Value V3D_HUB_IDENT0(0xfec00008) 0x%08x\n", v3d_reg);
+    PROBE(REGS_V3D_HUB_IDENT->axi_cfg);
+    PROBE(REGS_V3D_HUB_IDENT->uif_cfg);
+    PROBE(REGS_V3D_HUB_IDENT->ident[0]);
+    PROBE(REGS_V3D_HUB_IDENT->ident[1]);
+    PROBE(REGS_V3D_HUB_IDENT->ident[2]);
+    PROBE(REGS_V3D_HUB_IDENT->ident[3]);
+
+    ncores = (REGS_V3D_HUB_IDENT->ident[1] & VHI_NCORES_MASK) >> VHI_NCORES_SHIFT;
+    printf("number of GPU cores = %d\n", ncores);
+
+    PROBE(REGS_V3D_CORE_CTL(0)->ident[0]);
+    PROBE(REGS_V3D_CORE_CTL(0)->ident[1]);
+    PROBE(REGS_V3D_CORE_CTL(0)->ident[2]);
+
+    PROBE(REGS_V3D_CORE_CTL(1)->ident[0]);
+    PROBE(REGS_V3D_CORE_CTL(1)->ident[1]);
+    PROBE(REGS_V3D_CORE_CTL(1)->ident[2]);
+
+    u64 * gpu_code = get_gpu_code();
+
+    static u32 arr[0x4000] = {};
+    u32 arr_length = 0x4000;
+
+    static u32 uniform [6] __attribute__((aligned(4))) = {
+        0,
+        0xfedcba98,
+        0x00004000,
+        0xfcfcfcfc,
+        0xfcfcfcfc,
+        0xfffffff4
+    };
+
+    arr[0] = (u32)arr;
+    // arr[2] = arr_length;
+
+    PROBE(gpu_code);
+    PROBE(uniform);
+    PROBE(arr);
+    PROBE(arr[0]);
+
+    run_gpu(gpu_code, uniform);
 }
 
 void mailbox() {
@@ -170,6 +210,7 @@ void kernel_main() {
     video_set_dma(true);
     video_init();
     video_set_resolution(1280, 800, 32);
+    // video_set_resolution(1600, 900, 32);
     gpu_info();
 
 //  ------------------ Start OS -------------------

@@ -34,6 +34,18 @@ typedef struct {
   mailbox_fb_pitch pitch;
 } mailbox_fb_request;
 
+	// u32 display_num;
+	// u32 width;
+	// u32 height;
+	// u32 depth;
+	// u32 pitch;
+	// u32 virtual_width;
+	// u32 virtual_height;
+	// u32 virtual_width_offset;
+	// u32 virtual_height_offset;
+	// unsigned long fb_bus_address;
+
+
 static mailbox_fb_request fb_req;
 
 static dma_channel *dma;

@@ -64,10 +64,14 @@ typedef struct {
   dma4_channel_regs dma4_regs[4];
 } dma_channel_regs_all;
 
-#define REGS_DMA(channel) ((dma_channel_regs *)((u64)((PBASE + 0x7000) + (channel * 0x100))))
+#define DMA_OFFSET 0x7000
+#define DMA_CHANNEL_OFFSET 0x100
+#define DMA_BASE  (PBASE + DMA_OFFSET)
 
-#define REGS_DMA_INT_STATUS *((reg32 *)(PBASE + 0x7fe0))
-#define REGS_DMA_ENABLE *((reg32 *)(PBASE + 0x7ff0))
+#define REGS_DMA(channel) ((dma_channel_regs *)((u64)(DMA_BASE + (channel * DMA_CHANNEL_OFFSET))))
+
+#define REGS_DMA_INT_STATUS *((reg32 *)(DMA_BASE + 0xfe0))
+#define REGS_DMA_ENABLE *((reg32 *)(DMA_BASE + 0xff0))
 
 #define DMA_CS_PANIC_PRIORITY_SHIFT   20
 #define DMA_DEFAULT_PANIC_PRIORITY    0xf
