@@ -39,24 +39,12 @@ i16 gpu_init(void){
     return INIT_SUCCESS;
 }
 
-static u32 default_uniform [6] __attribute__((aligned(4))) = {
-    0x08360000,
-    0xfedcba98,
-    0x01000000,
-    0xfcfcfcfc,
-    0xfcfcfcfc,
-    0xfffffff4
-};
-
 #define CSD_STATUS(n) ((n >> 4) & ((1 << 8) - 1u))
 
 void run_gpu(u64 * code, u32 * uniform) {
-    if (uniform == 0) {
-        uniform = (u32 *)default_uniform;
-    }
 
-    PROBE(code);
-    PROBE(uniform);
+    // PROBE(code);
+    // PROBE(uniform);
 
     u32 V3D_L2TCACTL_TMUWCF = 1 << 8;
     u32 V3D_L2TCACTL_L2TFLS = 1 << 0;
@@ -67,34 +55,34 @@ void run_gpu(u64 * code, u32 * uniform) {
 
     printf("Resetting L2 cache\n");
 
-    PROBE(v3d_core0_ctl->l2tflsta);
+    // PROBE(v3d_core0_ctl->l2tflsta);
 
     v3d_core0_ctl->l2tflsta = 0;
-    PROBE(v3d_core0_ctl->l2tflsta);
+    // PROBE(v3d_core0_ctl->l2tflsta);
 
-    PROBE(v3d_core0_ctl->l2tflend);
+    // PROBE(v3d_core0_ctl->l2tflend);
 
     v3d_core0_ctl->l2tflend = ~0;
-    PROBE(v3d_core0_ctl->l2tflend);
+    // PROBE(v3d_core0_ctl->l2tflend);
 
-    PROBE(v3d_core0_ctl->l2tcactl);
+    // PROBE(v3d_core0_ctl->l2tcactl);
 
     v3d_core0_ctl->l2tcactl = V3D_L2TCACTL_L2TFLS | V3D_L2TCACTL_FLM_CLEAN;
-    PROBE(v3d_core0_ctl->l2tcactl);
+    // PROBE(v3d_core0_ctl->l2tcactl);
 
     v3d_core0_ctl->l2tcactl = V3D_L2TCACTL_TMUWCF;
-    PROBE(v3d_core0_ctl->l2tcactl);
+    // PROBE(v3d_core0_ctl->l2tcactl);
 
     while (v3d_core0_ctl->l2tcactl & V3D_L2TCACTL_TMUWCF)
         ;
-    PROBE(v3d_core0_ctl->l2tcactl);
+    // PROBE(v3d_core0_ctl->l2tcactl);
 
     v3d_core0_ctl->l2tcactl = V3D_L2TCACTL_L2TFLS | V3D_L2TCACTL_FLM_FLUSH;
-    PROBE(v3d_core0_ctl->l2tcactl);
+    // PROBE(v3d_core0_ctl->l2tcactl);
 
     while (v3d_core0_ctl->l2tcactl & V3D_L2TCACTL_L2TFLS)
         ;
-    PROBE(v3d_core0_ctl->l2tcactl);
+    // PROBE(v3d_core0_ctl->l2tcactl);
 
     v3d_core_csd_regs * v3d_core0_csd = REGS_V3D_CORE_CSD(0);
 
@@ -124,14 +112,14 @@ void run_gpu(u64 * code, u32 * uniform) {
     v3d_core0_csd->queued_cfg[5] = (u32)code;
     v3d_core0_csd->queued_cfg[6] = (u32)uniform;
 
-    PROBE(v3d_core0_csd->status);
-    PROBE(v3d_core0_csd->queued_cfg[0]);
-    PROBE(v3d_core0_csd->queued_cfg[1]);
-    PROBE(v3d_core0_csd->queued_cfg[2]);
-    PROBE(v3d_core0_csd->queued_cfg[3]);
-    PROBE(v3d_core0_csd->queued_cfg[4]);
-    PROBE(v3d_core0_csd->queued_cfg[5]);
-    PROBE(v3d_core0_csd->queued_cfg[6]);
+    // PROBE(v3d_core0_csd->status);
+    // PROBE(v3d_core0_csd->queued_cfg[0]);
+    // PROBE(v3d_core0_csd->queued_cfg[1]);
+    // PROBE(v3d_core0_csd->queued_cfg[2]);
+    // PROBE(v3d_core0_csd->queued_cfg[3]);
+    // PROBE(v3d_core0_csd->queued_cfg[4]);
+    // PROBE(v3d_core0_csd->queued_cfg[5]);
+    // PROBE(v3d_core0_csd->queued_cfg[6]);
 
     printf("Launching job\n");
 
@@ -149,8 +137,8 @@ void run_gpu(u64 * code, u32 * uniform) {
     PROBE(v3d_core0_csd->queued_cfg[5]);
     PROBE(v3d_core0_csd->queued_cfg[6]);
 
-    printf("Sleeping 2s\n");
-    timer_sleep(2000);
+    // printf("Sleeping 2s\n");
+    // timer_sleep(2000);
 
     u32 icount = 0;
     while (CSD_STATUS(v3d_core0_csd->status) <= count && icount < 10) {
@@ -158,13 +146,21 @@ void run_gpu(u64 * code, u32 * uniform) {
             printf("Sleeping 1s\n");
             timer_sleep(1000);
             PROBE(v3d_core0_csd->status);
-            printf("CSD Status: %d\n", CSD_STATUS(v3d_core0_csd->status));
+            printf("Completed: %d\n", CSD_STATUS(v3d_core0_csd->status));
         }
         icount++;
     }
-    PROBE(icount);
-    PROBE(v3d_core0_csd->status);
-        printf("CSD Status: %d\n", CSD_STATUS(v3d_core0_csd->status));
 
     PROBE(v3d_core0_csd->status);
+    printf("Completed: %d\n", CSD_STATUS(v3d_core0_csd->status));
+
+    v3d_core0_ctl->l2tcactl = V3D_L2TCACTL_TMUWCF;
+
+    while (v3d_core0_ctl->l2tcactl & V3D_L2TCACTL_TMUWCF)
+        ;
+
+    v3d_core0_ctl->l2tcactl = V3D_L2TCACTL_L2TFLS | V3D_L2TCACTL_FLM_FLUSH;
+
+    while (v3d_core0_ctl->l2tcactl & V3D_L2TCACTL_L2TFLS)
+        ;
 }

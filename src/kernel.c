@@ -82,19 +82,30 @@ void user_process(){
 }
 
 static u64 gpu_code [] __attribute__((aligned(4))) =  {
-    0x3d807180bb800000,
-    0x3de0318bb683f006,
-    0x3c00318cb6836040,
-    0x3de021813883e044,
-    0x3de0318bb683f00b,
-    0x3c00318cb6836040,
-    0x3c203180bb800000,
-    0x3c203180bb800000,
-    0x3c003180bb800000,
-    0x3c003180bb800000,
-    0x3c203180bb800000,
-    0x3c003180bb800000,
-    0x3c003180bb800000
+    0x3D807186BB800000,
+    0x3DE03181B683F001,
+    0x3DE031817C83900C,
+    0x3DE03180B683F003,
+    0x3DE031807C838008,
+    0x3DE03001B6FC1003,
+    0x3DE031807C838004,
+    0x3C003181B6801000,
+    0x3DE03181B6839007,
+    0x3C003182B6809000,
+    0x3C00318BB6812000,
+    0x3C00318CB6836040,
+    0x3C003186BB815000,
+    0x3C203192BB814000,
+    0x3C003186BB800000,
+    0x3C003186BB800000,
+    0x3C203186BB800000,
+    0x3C203186BB800000,
+    0x3C003186BB800000,
+    0x3C003186BB800000,
+    0x3C203186BB800000,
+    0x3C003186BB800000,
+    0x3C003186BB800000,
+    0x3C003186BB800000,
 };
 
 // static u32 arr[0x4000] = {};
@@ -102,8 +113,8 @@ static u64 gpu_code [] __attribute__((aligned(4))) =  {
 
 static u32 uniform [3] __attribute__((aligned(4))) = {
     0,
-    ~0,
-    ~0
+    0x10,
+    0x20
 };
 
 void gpu_info(){
@@ -146,6 +157,7 @@ void gpu_info(){
     PROBE(gpu_code);
     PROBE(uniform);
 
+    PROBE(uniform[0]);
     PROBE(uniform[1]);
     PROBE(uniform[2]);
 
@@ -155,6 +167,7 @@ void gpu_info(){
 
     printf("Finished GPU kernel\n");
 
+    PROBE(uniform[0]);
     PROBE(uniform[1]);
     PROBE(uniform[2]);
 }
