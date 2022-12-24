@@ -82,13 +82,19 @@ void user_process(){
 }
 
 static u64 gpu_code [] __attribute__((aligned(4))) =  {
+    0x3d807180bb800000,
+    0x3de0318bb683f006,
+    0x3c00318cb6836040,
+    0x3de021813883e044,
+    0x3de0318bb683f00b,
+    0x3c00318cb6836040,
     0x3c203180bb800000,
     0x3c203180bb800000,
     0x3c003180bb800000,
     0x3c003180bb800000,
     0x3c203180bb800000,
     0x3c003180bb800000,
-    0x3c003180bb800000,
+    0x3c003180bb800000
 };
 
 // static u32 arr[0x4000] = {};
