@@ -81,6 +81,25 @@ void user_process(){
     call_sys_exit();
 }
 
+static u64 gpu_code [] __attribute__((aligned(4))) =  {
+    0x3c203180bb800000,
+    0x3c203180bb800000,
+    0x3c003180bb800000,
+    0x3c003180bb800000,
+    0x3c203180bb800000,
+    0x3c003180bb800000,
+    0x3c003180bb800000,
+};
+
+// static u32 arr[0x4000] = {};
+// u32 arr_length = 0x4000;
+
+static u32 uniform [3] __attribute__((aligned(4))) = {
+    0,
+    ~0,
+    ~0
+};
+
 void gpu_info(){
     i16 res = 0;
     u32 ncores;
@@ -113,29 +132,25 @@ void gpu_info(){
     PROBE(REGS_V3D_CORE_CTL(1)->ident[1]);
     PROBE(REGS_V3D_CORE_CTL(1)->ident[2]);
 
-    u64 * gpu_code = get_gpu_code();
 
-    static u32 arr[0x4000] = {};
-    u32 arr_length = 0x4000;
+    uniform[0] = (u32)(&uniform[1]);
 
-    static u32 uniform [6] __attribute__((aligned(4))) = {
-        0,
-        0xfedcba98,
-        0x00004000,
-        0xfcfcfcfc,
-        0xfcfcfcfc,
-        0xfffffff4
-    };
-
-    arr[0] = (u32)arr;
     // arr[2] = arr_length;
 
     PROBE(gpu_code);
     PROBE(uniform);
-    PROBE(arr);
-    PROBE(arr[0]);
+
+    PROBE(uniform[1]);
+    PROBE(uniform[2]);
+
+    printf("Running GPU kernel\n");
 
     run_gpu(gpu_code, uniform);
+
+    printf("Finished GPU kernel\n");
+
+    PROBE(uniform[1]);
+    PROBE(uniform[2]);
 }
 
 void mailbox() {
